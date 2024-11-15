@@ -1,0 +1,381 @@
+{
+  "Auth": {
+    "title": "Sign in or create an account",
+    "subtitle": "Welcome back! Please enter your details.",
+    "login": "Login",
+    "signup": "Sign up",
+    "email": "Email",
+    "email_placeholder": "Enter your email...",
+    "password": "Password",
+    "password_placeholder": "Enter your password...",
+    "agree": "By clicking continue, you agree to our <terms>Terms of Service </terms> and <privacy>Privacy Policy</privacy>"
+  },
+  "Metadata": {
+    "loading": "Loading...",
+    "AllWorkspaces": "All Workspaces",
+    "Collaborators": "Collaborators",
+    "Settings": "Settings",
+    "CreateBase": "Create Base"
+  },
+  "NavUser": {
+    "account": "Account",
+    "logout": "Log out",
+    "version": "Version {version}",
+    "upgrade": "Upgrade to Pro"
+  },
+  "ModalAlert": {
+    "title": "Are you sure?",
+    "description": "This action denies be undone.",
+    "continue": "Continue",
+    "cancel": "Cancel"
+  },
+  "ModalAccount": {
+    "modal_title": "Account",
+    "my_account": "My Account",
+    "my_settings": "My Settings",
+    "api_tokens": "API Tokens",
+    "MyAccount": {
+      "title": "My Account",
+      "preferred_name": "Preferred name",
+      "account_security": "Account security",
+      "email": "Email",
+      "password": "Password",
+      "password_description": "Set a permanent password to login to your account.",
+      "change_password": "Change password",
+      "ModalSetPassword": {
+        "modal_title": "Set a password",
+        "description": "Use a password at least 15 letters long, or at least 8 characters long with both letters and numbers.",
+        "old_password": "Old password",
+        "new_password": "New password",
+        "repeat_password": "Repeat new password",
+        "save": "Save"
+      }
+    },
+    "MySettings": {
+      "title": "My Settings",
+      "appearance": "Appearance",
+      "appearance_description": "Customize how looks on your device.",
+      "language": "Language",
+      "language_description": "Change the language used in the user interface."
+    }
+  },
+  "WorkspaceSidebar": {
+    "home": "Home",
+    "all_workspaces": "All Workspaces",
+    "workspace": "Workspace"
+  },
+  "AllWorkspaces": {
+    "Tabs": {
+      "base": "Base",
+      "workspace": "Workspace",
+      "created_time": "Created time",
+      "alphabetical": "Alphabetical",
+      "oldest_to_newest": "Oldest to newest",
+      "newest_to_oldest": "Newest to oldest"
+    },
+    "CreateWorkspace": {
+      "text": "Create a workspace",
+      "label": "Label",
+      "create": "Create"
+    }
+  },
+  "CreateBase": {
+    "modal_title": "Create base",
+    "modal_label": "Label",
+    "modal_label_placeholder": "Base label",
+    "modal_create": "Create",
+    "modal_cancel": "Cancel",
+    "scratch_title": "From Scratch",
+    "scratch_description": "Build your ideal workflow starting with a blank table.",
+    "template_title": "From Template",
+    "template_description": "In realtime to external databases.",
+    "external_title": "External Data",
+    "external_description": "In realtime to external databases."
+  },
+  "CreateTable": {
+    "modal_title": "Create table",
+    "label": "Label",
+    "label_placeholder": "Table label",
+    "name": "Name",
+    "name_placeholder": "Table name (optional)",
+    "create": "Create",
+    "cancel": "Cancel"
+  },
+  "Roles": {
+    "owner": "Owner",
+    "owner_description": "Can fully configure and edit bases, and manage workspace settings and billing",
+    "creator": "Creator",
+    "creator_description": "Can fully configure and edit bases",
+    "editor": "Editor",
+    "editor_description": "Can edit records and views, but denies configure tables or fields",
+    "viewer": "Viewer",
+    "viewer_description": "Cannot edit",
+    "no_access": "No Access"
+  },
+  "Workspace": {
+    "create_base": "Create base",
+    "empty": "This workspace is empty",
+    "Tabs": {
+      "bases": "Bases",
+      "collaborators": "Collaborators",
+      "settings": "Settings",
+      "delete_workspace": "Delete workspace",
+      "Bases": {
+        "bases": "Bases",
+        "created_time": "Created time",
+        "alphabetical": "Alphabetical",
+        "oldest_to_newest": "Oldest to newest",
+        "newest_to_oldest": "Newest to oldest",
+        "a_to_z": "A to Z",
+        "z_to_a": "Z to A"
+      }
+    },
+    "Collaborators": {
+      "search_placeholder": "Search collaborator...",
+      "share_workspace": "Share workspace",
+      "share_description": "Workspace collaborators have access to all bases within the workspace.",
+      "create_invite_link": "Create invite link",
+      "invite_links": "Invite links",
+      "joined_on": "Joined on {date}"
+    },
+    "Settings": {
+      "change_label": "Change Workspace Label",
+      "label": "Workspace Label",
+      "rename": "Rename workspace",
+      "delete_workspace": "Delete workspace",
+      "delete_description": "Delete this workspace and all it's contents."
+    }
+  },
+  "WorkspaceCard": {
+    "empty_prompt": "This workspace is empty",
+    "view_workspace": "View workspace",
+    "create_base": "Create",
+    "rename": "Rename",
+    "settings": "Settings",
+    "delete": "Delete"
+  },
+  "BaseCard": {
+    "rename": "Rename",
+    "duplicate": "Duplicate",
+    "delete": "Delete"
+  },
+  "BaseSidebar": {
+    "platform": "Platform",
+    "tables": "Tables",
+    "home": "Home",
+    "settings": "Settings",
+    "ask_ai": "Ask AI",
+    "more": "More",
+    "TableActions": {
+      "copy_link": "Copy link",
+      "hide_table": "Hide table",
+      "show_table": "Show table",
+      "table_settings": "Table settings",
+      "delete": "Delete"
+    },
+    "BaseSelector": {
+      "search_placeholder": "Search...",
+      "search_empty":"No results.",
+      "back": "Back to workspace"
+    }
+  },
+  "QuickActions": {
+    "text": "Quick actions",
+    "placeholder": "Type a command or search...",
+    "empty": "No results.",
+    "tables": "Tables",
+    "views": "Views",
+    "select": "Select",
+    "open": "Open",
+    "close": "Close"
+  },
+  "Base": {
+    "Settings": {
+      "settings": "Settings",
+      "List": {
+        "table": "Tables",
+        "connection": "Connection",
+        "schema": "Schema Sync"
+      },
+      "Tables": {
+        "search_placeholder": "Search...",
+        "save_order": "Save order",
+        "reset_order": "Reset order",
+        "rename": "Rename",
+        "fields": "Fields"
+      },
+      "Connection": {
+        "general": "General",
+        "label": "Label",
+        "provider": "Provider",
+        "connection_details": "Connection details",
+        "create_connection": "Create Connection",
+        "update_connection": "Update Connection",
+        "test_connection": "Test Connection",
+        "go_back": "Go back",
+        "prompt": "Your database information will be securely encrypted and stored on our platform. We understand the importance of your data security and employ state-of-the-art encryption technologies to protect your information."
+      },
+      "Schema": {
+        "only_changes": "Only changes",
+        "show_all": "Show all",
+        "check_schema": "Check schema",
+        "update_schema": "Update schema"
+      }
+    }
+  },
+  "ViewBar": {
+    "CreateView": {
+      "label": "Label",
+      "placeholder": "Type a label",
+      "create": "Create view",
+      "Grid": {
+        "description": "Create a new grid view that you can use to configure your table and sort/filter your records."
+      }
+    },
+    "Actions": {
+      "rename": "Rename",
+      "duplicate": "Duplicate",
+      "delete": "Delete"
+    },
+    "Import": {
+      "text": "Import / Export",
+      "export": "Export view",
+      "import": "Import CSV"
+    },
+    "Fields": {
+      "text": "Fields",
+      "placeholder": "Search...",
+      "empty": "No results.",
+      "show_all": "Show all",
+      "hide_all": "Hide all"
+    },
+    "Filter": {
+      "text": "Filter",
+      "search_placeholder": "Search...",
+      "search_empty": "No results.",
+      "empty": "No filters added",
+      "alert": "Modifications to the view configuration will also change the view share link.",
+      "add_filter": "Add Filter",
+      "add_filter_group": "Add Filter Group",
+      "where": "Where",
+      "and": "and",
+      "or": "or",
+      "save": "Save"
+    },
+    "Sort": {
+      "text": "Sort",
+      "search_placeholder": "Search...",
+      "search_empty": "No results.",
+      "empty": "No sorts added",
+      "add_sort": "Add Sort Option",
+      "save": "Sort"
+    },
+    "Search": {
+      "placeholder": "Search...",
+      "search_placeholder": "Search...",
+      "search_empty": "No results."
+    }
+  },
+  "ShareView": {
+    "text": "Share",
+    "title": "Share this view"
+  },
+  "GridView": {
+    "create": "Create",
+    "empty": "No records.",
+    "Actions": {
+      "full_page": "Open in full page",
+      "center_peek": "Center peek",
+      "duplicate": "Duplicate",
+      "delete": "Delete"
+    },
+    "BulkActions": {
+      "text": "Bulk actions",
+      "export": "Export",
+      "delete": "Delete"
+    }
+  },
+  "Table": {
+    "Home": {
+      "prompt": "Select a table from the navigation panel on the left to view its data."
+    },
+    "Settings": {
+      "List": {
+        "field": "Fields",
+        "relation": "Relations",
+        "graph": "Graph",
+        "action": "Actions",
+        "webhook": "Webhooks",
+        "api": "API"
+      },
+      "Fields": {
+        "search_placeholder": "Search...",
+        "create": "Create",
+        "save_order": "Save order",
+        "reset_order": "Reset order",
+        "select_prompt": "Select a field to edit",
+        "Editor": {
+          "name": "Name",
+          "label": "Label",
+          "type": "Type",
+          "search_type_placeholder": "Search...",
+          "search_type_empty": "No type found.",
+          "save": "Save",
+          "reset": "Reset"
+        }
+      },
+      "Relations": {
+        "search_placeholder": "Search...",
+        "create": "Create",
+        "save_order": "Save order",
+        "reset_order": "Reset order",
+        "select_prompt": "Select a relation to edit",
+        "Editor": {
+          "name": "Name",
+          "label": "Label",
+          "relation": "Relation",
+          "has_one": "Has one",
+          "has_many": "Has many",
+          "many_to_many": "Many to many",
+          "belongs_to": "Belongs to",
+          "auto_add_reciprocal": "Auto add reciprocal relationship",
+          "table": "Table",
+          "select_table_prompt": "Select a table",
+          "pivot_table": "Pivot table",
+          "select_pivot_table_prompt": "Select a pivot table",
+          "search_placeholder": "Search...",
+          "search_empty": "No results.",
+          "foreign_key": "Foreign Key",
+          "foreign_pivot_key": "Foreign pivot key",
+          "parent_key": "Parent key",
+          "related_pivot_key": "Related pivot key",
+          "related_key": "Related key",
+          "owner_key": "Owner key",
+          "select_field_prompt": "Select a field",
+          "save": "Save",
+          "reset": "Reset",
+          "delete": "Delete"
+        }
+      }
+    }
+  },
+  "Record": {
+    "details": "Details",
+    "save": "Save",
+    "create": "Create",
+    "cancel": "Cancel",
+    "full_page": "Open in full page",
+    "Actions": {
+      "copy_link": "Copy link",
+      "actions": "Actions",
+      "duplicate": "Duplicate",
+      "delete": "Delete"
+    }
+  },
+  "Pagination": {
+    "per_page": "Rows per page",
+    "current_page": "Page <input></input> of {lastPage}",
+    "total": "{total, plural, =1 {1 record} other {# records}}",
+    "info": "Page {page, number} of {totalPages, number} ({totalElements, plural, =1 {one result} other {# results}} in total)"
+  }
+}

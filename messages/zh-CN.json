@@ -1,0 +1,381 @@
+{
+  "Auth": {
+    "title": "登录或创建一个帐号",
+    "subtitle": "欢迎回来! 请输入你的信息。",
+    "login": "登录",
+    "signup": "注册",
+    "email": "邮箱",
+    "email_placeholder": "输入邮箱...",
+    "password": "密码",
+    "password_placeholder": "输入密码...",
+    "agree": "点击继续，即表示您同意我们的 <terms>服务条款</terms> 和 <privacy>隐私政策</privacy>"
+  },
+  "Metadata": {
+    "loading": "加载中...",
+    "AllWorkspaces": "所有工作区",
+    "Collaborators": "协作者",
+    "Settings": "设置",
+    "CreateBase": "创建数据库"
+  },
+  "NavUser": {
+    "account": "帐号",
+    "logout": "退出",
+    "version": "版本 {version}",
+    "upgrade": "升级方案"
+  },
+  "ModalAlert": {
+    "title": "确定执行此操作?",
+    "description": "此操作无法撤消。",
+    "continue": "确认操作",
+    "cancel": "取消"
+  },
+  "ModalAccount": {
+    "modal_title": "帐号",
+    "my_account": "我的帐号",
+    "my_settings": "我的设置",
+    "api_tokens": "API Tokens",
+    "MyAccount": {
+      "title": "我的帐号",
+      "preferred_name": "偏好名称",
+      "account_security": "帐号安全",
+      "email": "邮箱",
+      "password": "密码",
+      "password_description": "更改密码以登录账号。",
+      "change_password": "更改密码",
+      "ModalSetPassword": {
+        "modal_title": "更改密码",
+        "description": "密码长度至少为 15 个字母，或 8 个字符且同时包含字母和数字。",
+        "old_password": "输入你的当前密码",
+        "new_password": "输入新密码",
+        "repeat_password": "确认你的新密码",
+        "save": "更改密码"
+      }
+    },
+    "MySettings": {
+      "title": "我的设置",
+      "appearance": "外观",
+      "appearance_description": "自定义设备上的外观。",
+      "language": "语言",
+      "language_description": "更改用户界面中使用的语言。"
+    }
+  },
+  "WorkspaceSidebar": {
+    "home": "主页",
+    "all_workspaces": "所有工作区",
+    "workspace": "工作区"
+  },
+  "AllWorkspaces": {
+    "Tabs": {
+      "base": "数据库",
+      "workspace": "工作区",
+      "created_time": "按创建时间",
+      "alphabetical": "按字母顺序",
+      "oldest_to_newest": "从旧到新",
+      "newest_to_oldest": "从新到旧"
+    },
+    "CreateWorkspace": {
+      "text": "创建工作区",
+      "label": "名称",
+      "create": "创建"
+    }
+  },
+  "CreateBase": {
+    "modal_title": "创建数据库",
+    "modal_label": "名称",
+    "modal_label_placeholder": "数据库名称",
+    "modal_create": "创建",
+    "modal_cancel": "取消",
+    "scratch_title": "空白数据库",
+    "scratch_description": "从空白表开始构建理想的工作流程。",
+    "template_title": "从模板创建",
+    "template_description": "实时传输到外部数据库。",
+    "external_title": "外部数据",
+    "external_description": "实时连接到外部数据库。"
+  },
+  "CreateTable": {
+    "modal_title": "创建表格",
+    "label": "名称",
+    "label_placeholder": "表格名称",
+    "name": "物理表名",
+    "name_placeholder": "物理表名 (可选)",
+    "create": "创建",
+    "cancel": "取消"
+  },
+  "Roles": {
+    "owner": "所有者",
+    "owner_description": "可以完全配置和编辑数据库，并管理工作区设置和计费",
+    "creator": "创建者",
+    "creator_description": "可以完全配置和编辑数据库",
+    "editor": "编辑者",
+    "editor_description": "可以编辑记录和视图，但不能配置表或字段",
+    "viewer": "查看者",
+    "viewer_description": "无法编辑",
+    "no_access": "无访问权限"
+  },
+  "Workspace": {
+    "create_base": "创建数据库",
+    "empty": "工作区是空的",
+    "Tabs": {
+      "bases": "数据库",
+      "collaborators": "协作者",
+      "settings": "设置",
+      "delete_workspace": "删除工作区",
+      "Bases": {
+        "bases": "数据库",
+        "created_time": "按创建时间",
+        "alphabetical": "按字母顺序",
+        "oldest_to_newest": "从旧到新",
+        "newest_to_oldest": "从新到旧",
+        "a_to_z": "A 到 Z",
+        "z_to_a": "Z 到 A"
+      }
+    },
+    "Collaborators": {
+      "search_placeholder": "搜索协作者...",
+      "share_workspace": "分享工作区",
+      "share_description": "工作区协作者可以访问工作区内的所有数据库。",
+      "create_invite_link": "创建邀请链接",
+      "invite_links": "邀请链接",
+      "joined_on": "加入于 {date}"
+    },
+    "Settings": {
+      "change_label": "修改工作区名称",
+      "label": "工作区名称",
+      "rename": "重命名工作区",
+      "delete_workspace": "删除工作区",
+      "delete_description": "删除此工作区及其所有内容。"
+    }
+  },
+  "WorkspaceCard": {
+    "empty_prompt": "工作区是空的",
+    "view_workspace": "查看工作区",
+    "create_base": "创建",
+    "rename": "重命名",
+    "settings": "设置",
+    "delete": "删除"
+  },
+  "BaseCard": {
+    "rename": "重命名",
+    "duplicate": "复制",
+    "delete": "删除"
+  },
+  "BaseSidebar": {
+    "platform": "平台",
+    "tables": "表格",
+    "home": "主页",
+    "settings": "设置",
+    "ask_ai": "Ask AI",
+    "more": "更多",
+    "TableActions": {
+      "copy_link": "复制链接",
+      "hide_table": "隐藏表格",
+      "show_table": "显示表格",
+      "table_settings": "表格设置",
+      "delete": "删除"
+    },
+    "BaseSelector": {
+      "search_placeholder": "搜索...",
+      "search_empty":"没有结果.",
+      "back": "返回工作区"
+    }
+  },
+  "QuickActions": {
+    "text": "快捷操作",
+    "placeholder": "输入命令或搜索...",
+    "empty": "没有结果.",
+    "tables": "表格",
+    "views": "视图",
+    "select": "选择",
+    "open": "打开",
+    "close": "关闭"
+  },
+  "Base": {
+    "Settings": {
+      "settings": "设置",
+      "List": {
+        "table": "表格",
+        "connection": "连接",
+        "schema": "Schema 同步"
+      },
+      "Tables": {
+        "search_placeholder": "搜索...",
+        "save_order": "保存排序",
+        "reset_order": "重置排序",
+        "rename": "重命名",
+        "fields": "字段管理"
+      },
+      "Connection": {
+        "general": "通用",
+        "label": "名称",
+        "provider": "提供者",
+        "connection_details": "连接详情",
+        "create_connection": "创建连接",
+        "update_connection": "更新连接",
+        "test_connection": "测试连接",
+        "go_back": "返回",
+        "prompt": "您的数据库信息将被安全加密并存储在我们的平台上。我们了解您的数据安全的重要性，并采用最先进的加密技术来保护您的信息。"
+      },
+      "Schema": {
+        "only_changes": "只显示变动",
+        "show_all": "显示所有",
+        "check_schema": "检查 schema 变动",
+        "update_schema": "更新 schema"
+      }
+    }
+  },
+  "ViewBar": {
+    "CreateView": {
+      "label": "名称",
+      "placeholder": "输入名称",
+      "create": "创建视图",
+      "Grid": {
+        "description": "创建一个新的网格视图，您可以使用它来配置表格并对记录进行排序/过滤。"
+      }
+    },
+    "Actions": {
+      "rename": "重命名",
+      "duplicate": "复制",
+      "delete": "删除"
+    },
+    "Import": {
+      "text": "导入 / 导出",
+      "export": "导出视图数据",
+      "import": "导入 CSV"
+    },
+    "Fields": {
+      "text": "字段",
+      "placeholder": "搜索...",
+      "empty": "没有结果.",
+      "show_all": "显示全部",
+      "hide_all": "隐藏全部"
+    },
+    "Filter": {
+      "text": "筛选",
+      "search_placeholder": "搜索...",
+      "search_empty": "没有结果.",
+      "empty": "当前没有筛选条件",
+      "alert": "修改视图配置也会改变视图分享链接。",
+      "add_filter": "添加筛选条件",
+      "add_filter_group": "添加筛选组",
+      "where": "当",
+      "and": "且",
+      "or": "或",
+      "save": "保存"
+    },
+    "Sort": {
+      "text": "排序",
+      "search_placeholder": "搜索...",
+      "search_empty": "没有结果.",
+      "empty": "没有排序条件",
+      "add_sort": "添加排序项",
+      "save": "排序"
+    },
+    "Search": {
+      "placeholder": "搜索...",
+      "search_placeholder": "搜索...",
+      "search_empty": "没有结果."
+    }
+  },
+  "ShareView": {
+    "text": "分享",
+    "title": "分享视图"
+  },
+  "GridView": {
+    "create": "创建",
+    "empty": "没有记录.",
+    "Actions": {
+      "full_page": "整页打开",
+      "center_peek": "居中预览",
+      "duplicate": "复制",
+      "delete": "删除"
+    },
+    "BulkActions": {
+      "text": "批量操作",
+      "export": "导出",
+      "delete": "删除"
+    }
+  },
+  "Table": {
+    "Home": {
+      "prompt": "从左侧导航面板中选择一个表来查看数据."
+    },
+    "Settings": {
+      "List": {
+        "field": "字段",
+        "relation": "关联",
+        "graph": "关系图",
+        "action": "操作",
+        "webhook": "Webhooks",
+        "api": "API"
+      },
+      "Fields": {
+        "search_placeholder": "搜索...",
+        "create": "创建",
+        "save_order": "保存排序",
+        "reset_order": "重置排序",
+        "select_prompt": "选择字段进行编辑",
+        "Editor": {
+          "name": "字段名",
+          "label": "名称",
+          "type": "类型",
+          "search_type_placeholder": "搜索...",
+          "search_type_empty": "没有结果.",
+          "save": "保存",
+          "reset": "重置"
+        }
+      },
+      "Relations": {
+        "search_placeholder": "搜索...",
+        "create": "创建",
+        "save_order": "保存排序",
+        "reset_order": "重置排序",
+        "select_prompt": "选择关联进行编辑",
+        "Editor": {
+          "name": "关联名",
+          "label": "名称",
+          "relation": "关联类型",
+          "has_one": "一对一",
+          "has_many": "一对多",
+          "many_to_many": "多对多",
+          "belongs_to": "属于",
+          "auto_add_reciprocal": "自动添加反向关联",
+          "table": "表格",
+          "select_table_prompt": "选择一个表格",
+          "pivot_table": "中间表",
+          "select_pivot_table_prompt": "选择中间表",
+          "search_placeholder": "搜索...",
+          "search_empty": "没有结果.",
+          "foreign_key": "外键",
+          "foreign_pivot_key": "外键中间键",
+          "parent_key": "父键",
+          "related_pivot_key": "相关中间键",
+          "related_key": "相关键",
+          "owner_key": "所有者键",
+          "select_field_prompt": "选择一个字段",
+          "save": "保存",
+          "reset": "重置",
+          "delete": "删除"
+        }
+      }
+    }
+  },
+  "Record": {
+    "details": "详情",
+    "save": "保存",
+    "create": "创建",
+    "cancel": "取消",
+    "full_page": "整页打开",
+    "Actions": {
+      "copy_link": "复制链接",
+      "actions": "操作",
+      "duplicate": "复制",
+      "delete": "删除"
+    }
+  },
+  "Pagination": {
+    "per_page": "每页条数",
+    "current_page": "第 <input></input> 页, 共 {lastPage} 页",
+    "total": "{total} 条记录",
+    "info": "Page {page, number} of {totalPages, number} ({totalElements, plural, =1 {one result} other {# results}} in total)"
+  }
+}
