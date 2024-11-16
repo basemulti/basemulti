@@ -1,11 +1,11 @@
 <div align="center">
-    <a href="https://github.com/basemulti/basemulti">
-        <img src="/public/logo.png" alt="Logo" width="80" height="80">
-    </a>
+  <a href="https://github.com/basemulti/basemulti">
+    <img src="/public/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-    <h3>Basemulti</h3>
+  <h3>Basemulti</h3>
 
-    您的终极无代码数据库解决方案！🎉  
+  您的终极无代码数据库解决方案！🎉  
 </div>
 
 ## 🌟 Basemulti 是什么？
