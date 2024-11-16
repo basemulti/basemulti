@@ -5,12 +5,9 @@
 
   <h3>Basemulti</h3>
 
-  <p>
-    Your Ultimate No-Code Database Solution! 🎉
-    <br />
-    <br />
-    <br />
-  </p>
+  Your Ultimate No-Code Database Solution! 🎉  
+  
+  English / [简体中文](./README_CN.md)
 </div>
 
 ## 🌟 What is Basemulti?
