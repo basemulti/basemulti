@@ -41,7 +41,7 @@ export async function createTable({
   const connection = manager.connection();
   const tableName = `${schema.schema.prefix ?? ''}${name}`;
   await connection.schema.createTable(tableName, (table) => {
-    table.integer('id').primary();
+    table.increments('id');
     table.string('name');
     table.string('created_by', 21);
     table.string('updated_by', 21);
