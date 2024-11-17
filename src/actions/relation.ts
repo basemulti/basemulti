@@ -51,11 +51,15 @@ export async function createRelation({
   }
 
   if (schema.hasRelation(tableName, relationName)) {
-    throw new Error(`Relation ${relationName} already exists`);
+    return {
+      error: 'Relation already exists'
+    };
   }
 
   if (!relationName) {
-    throw new Error('Relation name is required');
+    return {
+      error: 'Relation name is required'
+    };
   }
 
   schema.set(`tables.${tableName}.relations.${relationName}`, value);

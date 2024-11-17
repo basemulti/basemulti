@@ -41,13 +41,13 @@ export default function UserAuthForm({ action = 'login' }: {
     defaultValues,
   });
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = form.getValues();
     setLoading(true);
 
     if (action === 'signup') {
-      await signUp(
+      signUp(
         data.email,
         data.password,
       ).then(result => {
@@ -66,7 +66,7 @@ export default function UserAuthForm({ action = 'login' }: {
         setLoading(false);
       });
     } else {
-      await login({
+      login({
         email: data.email,
         password: data.password,
         callbackUrl: callbackUrl ?? "/workspaces",

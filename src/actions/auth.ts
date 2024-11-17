@@ -7,13 +7,13 @@ import { redirect } from "next/navigation";
 
 export async function signUp(email: string, password: string) {
   if (!email || !password) {
-    throw new Error(`Email and password are required.`);
+    return { error: "Email and password are required." };
   }
   
   if (email && (
     (await User.query().where('email', email).count()) > 0
   )) {
-    throw new Error(`This email is already in use.`);
+    return { error: "This email is already in use." };
   }
 
   const user = new User;
