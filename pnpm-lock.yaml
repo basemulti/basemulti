@@ -234,8 +234,8 @@ importers:
         specifier: ^5.1.7
         version: 5.1.7
       sutando:
-        specifier: 1.6.4
-        version: 1.6.4(mysql2@3.11.3)(pg@8.13.1)(sqlite3@5.1.7)
+        specifier: 1.6.6
+        version: 1.6.6(mysql2@3.11.3)(pg@8.13.1)(sqlite3@5.1.7)
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0
@@ -3885,8 +3885,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  sutando@1.6.4:
-    resolution: {integrity: sha512-I34lDxwCqKeS2hLTYcVFuNX4gOrZlyytrAIOJNiGxkn3tlNAnCU3S5c3RFDLPVt2GI1mLHYVLsdgeemrdpNXbg==}
+  sutando@1.6.6:
+    resolution: {integrity: sha512-NXpvC06K3gUNs55hr/+I7uZM64KQJ0ZCojPZNXu5cdsc7umHq4Ykb0x4UcSzsPCBJ5l4smx6Eja8EePZhoA+Mg==}
     engines: {node: '>=14', pnpm: '>=4'}
     hasBin: true
 
@@ -8265,7 +8265,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  sutando@1.6.4(mysql2@3.11.3)(pg@8.13.1)(sqlite3@5.1.7):
+  sutando@1.6.6(mysql2@3.11.3)(pg@8.13.1)(sqlite3@5.1.7):
     dependencies:
       collect.js: 4.36.1
       colorette: 2.0.20
