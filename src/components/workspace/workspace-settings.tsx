@@ -36,7 +36,11 @@ export default function WorkspaceSettings({ workspace }: WorkspaceSettingsProps)
       return;
     }
 
-    updateWorkspaceLabel({ id: workspace.id, label: label })
+    updateWorkspaceLabel({ id: workspace.id, label: label }).then((result) => {
+      if (result?.error) {
+        throw new Error(result?.error);
+      }
+    })
     .catch((error) => {
       toast.error("Uh oh! Something went wrong.", {
         description: error.message,

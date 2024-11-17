@@ -92,7 +92,6 @@ export default function WorkspaceCard({ workspace }: {
       if (result?.error) {
         throw new Error(result?.error);
       }
-      setRenaming(false);
       setLabel(newLabel);
     }).catch((error) => {
       setOptimisticLabel(label);
