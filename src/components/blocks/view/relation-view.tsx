@@ -54,7 +54,7 @@ async function Grid({ searchParams, record, relationName, schema, tableName, isS
   const data = await query.paginate(page, pageLimit);
 
   return <GridView
-    schema={schema.get()}
+    schema={schema.safe()}
     baseId={schema.schema.id}
     tableName={relationSetting.table}
     // dataPromise={data}

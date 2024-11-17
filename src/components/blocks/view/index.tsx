@@ -50,7 +50,7 @@ async function Grid({ searchParams, schema, tableName, viewId, isSharingPage }: 
   const data = await query.paginate(page, pageLimit);
 
   return <GridView
-    schema={schema.get()}
+    schema={schema.safe()}
     baseId={schema.schema.id}
     tableName={tableName}
     // dataPromise={data}
