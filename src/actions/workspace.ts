@@ -49,7 +49,7 @@ export async function updateWorkspaceLabel({ id, label }: { id: string; label: s
     const workspace = await user.getWorkspace(id);
 
     if (!workspace) {
-      return { error: 'xxxx' }
+      return { error: 'Workspace not found' }
     }
 
     if (denies(workspace?.role, 'workspace:update')) {
@@ -58,8 +58,9 @@ export async function updateWorkspaceLabel({ id, label }: { id: string; label: s
       }
     }
     
-    workspace.label = label;
-    await workspace.save();
+    await Workspace.query().where('id', id).update({
+      label
+    });
   } catch (error: any) {
     return { error: error.message }
   }
