@@ -29,7 +29,7 @@ import Filter from "@/components/blocks/filter/filter";
 import Fields from "@/components/blocks/fields/fields";
 import Pagination from "@/components/blocks/pagination/pagination";
 import Search from "../search";
-import SchemaBuilder, { FiltersType, SortsType } from "@/lib/schema-builder";
+import SchemaBuilder, { FiltersType, SortsType, WebhookSchemaType } from "@/lib/schema-builder";
 
 import {
   Popover,
@@ -124,6 +124,12 @@ export function GridView<TData, TValue>({
   }, [tableName, schema]);
 
   const tableSchema = schemaBuilder.table(tableName);
+  const actions: WebhookSchemaType[] = [];
+  Object.values(schemaBuilder.getWebhooks(tableName) || {}).forEach(webhook => {
+    if (webhook?.type === 'bulk-action') {
+      actions.push(webhook);
+    }
+  })
 
   /* this can be used to get the selectedrows 
   console.log("value", table.getFilteredSelectedRowModel()); */
@@ -319,6 +325,7 @@ export function GridView<TData, TValue>({
               tableName={tableName}
               primaryKey={schemaBuilder.getPrimaryKey(tableName)}
               rows={table.getFilteredSelectedRowModel().rows.map((row: any) => row.original)}
+              actions={actions}
               onReset={table.resetRowSelection}
             />
           )}

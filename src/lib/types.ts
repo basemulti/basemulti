@@ -1,4 +1,5 @@
 export type RoleType = 'owner' | 'creator' | 'editor' | 'viewer' | 'no-access';
+export type WebhookType = 'record.create' | 'record.update' | 'record.delete' | 'action' | 'bulk-action';
 
 export type Role = {
   role: RoleType;

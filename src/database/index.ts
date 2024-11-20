@@ -9,6 +9,7 @@ import Role from './models/role';
 import Collaborator from './models/collaborator';
 import InviteLink from './models/invite-links';
 import Share from './models/share';
+import Webhook from './models/webhook';
 import { appString } from '@/lib/utils';
 import snakeCase from "lodash/snakeCase";
 import { providerConfig } from '@/components/providers/server';
@@ -30,6 +31,7 @@ export {
   Collaborator,
   InviteLink,
   Share,
+  Webhook,
 }
 
 type Managers = Record<string, {

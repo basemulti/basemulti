@@ -1,8 +1,11 @@
 // import { experimental_taintObjectReference } from "react";
 import SchemaBuilder from "./schema-builder";
-import { Base, getManager } from "@/database";
-import type { Builder } from "sutando";
+import { Base, getManager, Webhook } from "@/database";
+import type { Builder, Model } from "sutando";
 import { decrypt, getCurrentUser } from "./server";
+import axios from "axios";
+import dayjs from "dayjs";
+import { WebhookType } from "./types";
 
 export default class SchemaServer extends SchemaBuilder {
   static async load(id: string) {
@@ -22,7 +25,7 @@ export default class SchemaServer extends SchemaBuilder {
     // )
     const connection = base.provider === 'default' ? '' : decrypt(base.getAttribute('connection'));
 
-    return new SchemaServer({
+    const schema = new SchemaServer({
       ...base.schema_data,
       id: id,
       workspace_id: base.workspace_id,
@@ -34,6 +37,8 @@ export default class SchemaServer extends SchemaBuilder {
       created_at: base.created_at,
       updated_at: base.updated_at,
     });
+
+    return schema;
   }
 
   static async loadWithoutAuth(id: string) {
@@ -70,6 +75,34 @@ export default class SchemaServer extends SchemaBuilder {
     const base = await Base.query().where("id", this.schema.id).firstOrFail();
     base.schema_data = this.pure();
     await base.save();
+  }
+
+  async loadWebhooks(types?: WebhookType[]) {
+    const query = Webhook.query().where({
+      base_id: this.schema.id,
+      active: 1,
+    });
+
+    if (types) {
+      query.whereIn('type', types);
+    }
+    
+    const webhooks = await query.get();
+
+    if (webhooks.count() > 0) {
+      for (let webhook of webhooks) {
+        this.set(`tables.${webhook.table_name}.webhooks.${webhook.id}`, {
+          id: webhook.id,
+          label: webhook.label,
+          endpoint: webhook.endpoint,
+          method: webhook.method,
+          type: webhook.type,
+          active: webhook.active,
+        })
+      }
+    }
+
+    return this;
   }
 
   query(tableName: string) {
@@ -113,8 +146,8 @@ export default class SchemaServer extends SchemaBuilder {
       return query;
     }
 
-    query.with('creator:id,name');
-    query.with('modifier:id,name');
+    query.with('creator:id,email,name');
+    query.with('modifier:id,email,name');
     return query;
   }
 
@@ -146,6 +179,31 @@ export default class SchemaServer extends SchemaBuilder {
 
     return query;
   }
+
+  async loadRecordRelations(record: Model, tableName: string) {
+    const tableSchema = this.table(tableName);
+    const tableSchemaValue = tableSchema.get();
+
+    for (let fieldName in tableSchemaValue.fields) {
+      const ui = tableSchema.field(fieldName).ui();
+      if (['relation'].includes(ui.type) && this.hasRelation(tableName, ui.name)) {
+        const relation = tableSchemaValue.relations[ui.name];
+        const primary_key = this.getPrimaryKey(relation.table) || 'id';
+
+        const fields: string[] = [
+          primary_key,
+          ui.label_field || this.getPrimaryKey(relation.table)
+        ];
+        
+        await record.load(`${ui.name}:${fields.filter((field: string) => field).join(',')}`);
+      }
+    }
+
+    if (this.isDefaultProvider()) {
+      await record.load('creator:id,email,name');
+      await record.load('modifier:id,email,name');
+    }
+  }
   
   withViewQuery(query: Builder<any>, tableName: string, viewId: string | undefined) {
     const viewSchema = this.table(tableName).view(viewId);
@@ -164,5 +222,50 @@ export default class SchemaServer extends SchemaBuilder {
     this.withViewQuery(query, tableName, viewId);
 
     return query;
+  }
+
+  async touchWebhook(tableName: string, webhookId: string, records: any[]) {
+    const webhook = this.getWebhook(tableName, webhookId);
+
+    if (!webhook || !webhook.active) {
+      throw new Error('webhook not found');
+    }
+
+    const requestData = {
+      type: webhook.type,
+      created_at: dayjs().toISOString(),
+      data: {
+        base_id: this.schema.id,
+        table_name: tableName,
+        records: records,
+      }
+    };
+
+    return await axios.request({
+      method: webhook.method,
+      url: webhook.endpoint,
+      data: requestData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+  }
+
+  async touchWebhooks(tableName: string, type: WebhookType, records: any[]) {
+    const webhooks = this.getWebhooks(tableName);
+
+    const results = await Promise.allSettled(
+      Object.values(webhooks || {})
+        .filter(webhook => webhook.type === type)
+        .map(webhook => this.touchWebhook(tableName, webhook.id, records))
+    );
+
+    const failures = results.filter(
+      (result): result is PromiseRejectedResult => result.status === 'rejected'
+    );
+
+    if (failures.length > 0) {
+      throw new Error(`${failures.length} webhooks failed to execute.`);
+    }
   }
 }

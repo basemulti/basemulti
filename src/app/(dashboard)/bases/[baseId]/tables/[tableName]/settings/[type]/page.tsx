@@ -5,6 +5,7 @@ import TableIconSelector from "@/components/table-icon-selector";
 import Field from "@/components/table-settings/field";
 import Graph from "@/components/table-settings/graph/graph";
 import Relation from "@/components/table-settings/relation";
+import Webhook from "@/components/table-settings/webhook";
 import TypeList from "@/components/table-settings/type-list";
 import SchemaServer from "@/lib/schema-server";
 import startCase from "lodash/startCase";
@@ -12,6 +13,7 @@ import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { Webhook as WebhookModel } from '@/database';
 
 const getSchema = cache(SchemaServer.load);
 
@@ -24,7 +26,7 @@ type PageProps = {
 }
 
 export default async function Page({ params, ...props }: PageProps) {
-  const { baseId } = params;
+  const { baseId, type } = params;
   let tableName = decodeURIComponent(params.tableName);
 
   const schema = await getSchema(baseId);
@@ -61,6 +63,11 @@ export default async function Page({ params, ...props }: PageProps) {
     { title: 'Settings', link: `/bases/${baseId}/tables/${tableName}` },
   ];
 
+  const webhooks = type === 'webhook' ? (await WebhookModel.query().where({
+    base_id: baseId,
+    table_name: tableName
+  }).get()).toData() : [];
+
   const renderType = (type: string) => {
     switch (type) {
       case 'field':
@@ -69,6 +76,11 @@ export default async function Page({ params, ...props }: PageProps) {
         return <Graph schema={schema.safe()} />;
       case 'relation':
         return <Relation schema={schema.safe()} />;
+      case 'webhook':
+        return <Webhook
+          schema={schema.safe()}
+          webhooks={webhooks}
+        />;
       default:
         return <div className="size-full flex items-center justify-center">
           Coming soon
@@ -90,7 +102,7 @@ export default async function Page({ params, ...props }: PageProps) {
         </div>
       </Bar>
       <TypeList />
-      {renderType(params.type)}
+      {renderType(type)}
     </div>
   </>
 }

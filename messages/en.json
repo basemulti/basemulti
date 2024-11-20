@@ -287,12 +287,16 @@
       "full_page": "Open in full page",
       "center_peek": "Center peek",
       "duplicate": "Duplicate",
-      "delete": "Delete"
+      "delete": "Delete",
+      "loading": "Loading...",
+      "success": "Success"
     },
     "BulkActions": {
       "text": "Bulk actions",
       "export": "Export",
-      "delete": "Delete"
+      "delete": "Delete",
+      "loading": "Loading...",
+      "success": "Success"
     }
   },
   "Table": {
@@ -355,6 +359,24 @@
           "save": "Save",
           "reset": "Reset",
           "delete": "Delete"
+        }
+      },
+      "Webhooks": {
+        "search_placeholder": "Search...",
+        "create": "Create Webhook",
+        "edit": "Edit",
+        "delete": "Delete",
+        "no_webhooks": "No webhooks",
+        "no_webhooks_description": "Webhooks are used to notify when records are created, updated or deleted, or manually triggered.",
+        "Create": {
+          "create": "Create Webhook",
+          "edit": "Edit Webhook",
+          "label": "Label",
+          "endpoint": "Endpoint URL",
+          "method": "Method",
+          "type": "Type",
+          "cancel": "Cancel",
+          "submit": "Submit"
         }
       }
     }

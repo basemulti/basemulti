@@ -22,12 +22,14 @@ const getSchema = cache(SchemaServer.load);
 
 export default async function Page({ params, searchParams }: PageProps) {
   const { baseId } = params;
-  const schema = await getSchema(baseId);
   let tableName = decodeURIComponent(params.tableName);
+  const schema = await getSchema(baseId);
 
   if (!schema) {
     redirect('/404');
   }
+
+  await schema.loadWebhooks(['action', 'bulk-action']);
 
   if (schema.hasTable(tableName) === false) {
     return <div className="relative size-full">

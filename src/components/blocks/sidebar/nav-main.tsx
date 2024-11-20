@@ -15,11 +15,12 @@ import { usePathname } from "next/navigation";
 
 interface BaseNavProps {
   baseId: string;
+  showSetting: boolean;
   setOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export function NavMain({
-  baseId, setOpen
+  baseId, showSetting
 }: BaseNavProps) {
   const t = useTranslations('BaseSidebar');
   const path = usePathname();
@@ -36,14 +37,14 @@ export function NavMain({
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
-        <SidebarMenuItem>
+        {showSetting && <SidebarMenuItem>
           <SidebarMenuButton asChild tooltip={t('settings')} isActive={path.startsWith(`/bases/${baseId}/settings`)}>
             <Link href={`/bases/${baseId}/settings/table`}>
               <SettingsIcon className="size-4" />
               <span>{t('settings')}</span>
             </Link>
           </SidebarMenuButton>
-        </SidebarMenuItem>
+        </SidebarMenuItem>}
         {/* <SidebarMenuItem>
           <SidebarMenuButton disabled tooltip={t('ask_ai')}>
             <SparklesIcon className="size-4" />
