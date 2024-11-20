@@ -103,9 +103,19 @@ export default function BaseCard({ base }: {
     }
   }
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('.dropdown-area')) {
+      return;
+    }
+    router.push(`/bases/${base.id}`);
+  };
+
   return (
     <>
-      <div className="rounded-lg p-4 flex justify-between gap-3 shadow-sm hover:shadow border border-border bg-background group">
+      <div
+        className="rounded-lg p-4 flex justify-between gap-3 shadow-sm hover:shadow border border-border bg-background group cursor-pointer"
+        onClick={handleCardClick}
+      >
         <div className="flex gap-3 flex-auto overflow-hidden">
           <BaseIcon className="w-12 h-12 rounded-lg" textClassName="text-lg" label={label} />
           {renaming
@@ -116,9 +126,10 @@ export default function BaseCard({ base }: {
             onBlur={handleBlurLabel}
             onKeyPress={handleKeyPress}
           />
-          : <Link href={`/bases/${base.id}`} className=""><div className="text-sm truncate w-auto">{optimisticLabel}</div></Link>}
+          : <div className="text-sm truncate w-auto">{optimisticLabel}</div>}
         </div>
         <div className={cn(
+          "dropdown-area",
           // "group-hover:block hidden",
           dropdownOpen && "block"
         )}>
