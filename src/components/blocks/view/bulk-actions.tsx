@@ -114,7 +114,7 @@ export default function BulkActions({ baseId, tableName, rows, actions = [], pri
           <Trash className="mr-2 h-4 w-4" /> {t('delete')}
         </DropdownMenuItem>
         {actions.length > 0 && <DropdownMenuSeparator />}
-        {actions.map(action => <DropdownMenuItem onClick={() => handleTouchWebhook(action)}>
+        {actions.map(action => <DropdownMenuItem key={action.id} onClick={() => handleTouchWebhook(action)}>
           <Settings2Icon className="mr-2 h-4 w-4" /> {action.label}
         </DropdownMenuItem>)}
       </DropdownMenuContent>
