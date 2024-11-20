@@ -104,7 +104,7 @@ export default function BaseCard({ base }: {
   }
 
   const handleCardClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('.dropdown-area')) {
+    if ((e.target as HTMLElement).closest('.unlink-area')) {
       return;
     }
     router.push(`/bases/${base.id}`);
@@ -122,14 +122,14 @@ export default function BaseCard({ base }: {
           ? <Input
             ref={inputRef}
             defaultValue={optimisticLabel}
-            className="h-8 focus-visible:ring-0"
+            className="h-8 focus-visible:ring-0 unlink-area"
             onBlur={handleBlurLabel}
             onKeyPress={handleKeyPress}
           />
           : <div className="text-sm truncate w-auto">{optimisticLabel}</div>}
         </div>
         <div className={cn(
-          "dropdown-area",
+          "unlink-area",
           // "group-hover:block hidden",
           dropdownOpen && "block"
         )}>
@@ -145,7 +145,7 @@ export default function BaseCard({ base }: {
                   <EllipsisIcon className="size-3" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="">
+              <DropdownMenuContent align="end" className="unlink-area">
                 <DropdownMenuGroup>
                   {allows(base.id, 'base', 'base:update') && <DropdownMenuItem className="cursor-pointer gap-2 h-8 text-sm" onClick={(e) => {
                     e.preventDefault();
