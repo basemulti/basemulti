@@ -1,6 +1,6 @@
 'use server'
 
-import { User } from "@/database";
+import { User, Workspace } from "@/database";
 import bcrypt from "bcrypt";
 import { getCurrentUser, getSession } from "@/lib/server";
 import { redirect } from "next/navigation";
@@ -21,6 +21,15 @@ export async function signUp(email: string, password: string) {
   user.email = email;
   user.password = await bcrypt.hash(password, 10);
   await user.save();
+
+  const workspace = new Workspace;
+  workspace.label = `${user.name}'s Workspace`;
+  await workspace.save();
+
+  await user?.related('workspaces').attach(workspace.id, {
+    role: 'owner',
+    collaboratorable_type: 'workspace'
+  });
 
   return user.toData();
 }
