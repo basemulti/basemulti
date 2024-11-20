@@ -2,19 +2,22 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FileOutputIcon, Settings2, Trash, X } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { FileOutputIcon, Settings2, Settings2Icon, Trash, X } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 import { AlertModal } from "@/components/modal/alert-modal";
 import { deleteRecords } from "@/actions/record";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { WebhookSchemaType } from "@/lib/schema-builder";
+import { touchWebhook } from "@/actions/webhook";
 
-export default function BulkActions({ baseId, tableName, rows, primaryKey, onReset }: {
+export default function BulkActions({ baseId, tableName, rows, actions = [], primaryKey, onReset }: {
   baseId: string;
   tableName: string;
   primaryKey: string | null;
   rows: any[];
+  actions?: WebhookSchemaType[];
   onReset: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -66,6 +69,32 @@ export default function BulkActions({ baseId, tableName, rows, primaryKey, onRes
     });
   }
 
+  const handleTouchWebhook = (action: WebhookSchemaType) => {
+    if (primaryKey === null) {
+      toast.error('No primary key found');
+      return;
+    }
+
+    toast.promise(touchWebhook({
+      baseId,
+      tableName,
+      webhookId: action.id,
+      params: {
+        recordIds: rows.map((row: any) => row[primaryKey]),
+      },
+    }), {
+      loading: t('loading'),
+      success: (result) => {
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        return t('success');
+      },
+      error: e => e.message,
+    });
+  }
+
   return <>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -84,6 +113,10 @@ export default function BulkActions({ baseId, tableName, rows, primaryKey, onRes
         <DropdownMenuItem onClick={() => setOpen(true)}>
           <Trash className="mr-2 h-4 w-4" /> {t('delete')}
         </DropdownMenuItem>
+        {actions.length > 0 && <DropdownMenuSeparator />}
+        {actions.map(action => <DropdownMenuItem onClick={() => handleTouchWebhook(action)}>
+          <Settings2Icon className="mr-2 h-4 w-4" /> {action.label}
+        </DropdownMenuItem>)}
       </DropdownMenuContent>
       <X className="cursor-pointer p-1 rounded-full w-5 h-5 bg-gray-100 text-gray-500" strokeWidth="3" onClick={onReset} />
     </DropdownMenu>

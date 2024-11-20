@@ -197,6 +197,7 @@ export const rolesMap: Record<RoleType, string[]> = {
     'base:read', 'base:create', 'base:update', 'base:delete',
     'table:create', 'table:read', 'table:update', 'table:delete',
     'field:create', 'field:read', 'field:update', 'field:delete',
+    'webhook:create', 'webhook:update', 'webhook:delete', 'webhook:touch',
     'view:create', 'view:read', 'view:update', 'view:delete',
     'record:create', 'record:read', 'record:update', 'record:delete'
   ],
@@ -205,6 +206,7 @@ export const rolesMap: Record<RoleType, string[]> = {
     'base:read', 'base:create', 'base:update', 'base:delete',
     'table:create', 'table:read', 'table:update', 'table:delete',
     'field:create', 'field:read', 'field:update', 'field:delete',
+    'webhook:create', 'webhook:update', 'webhook:delete', 'webhook:touch',
     'view:create', 'view:read', 'view:update', 'view:delete',
     'record:create', 'record:read', 'record:update', 'record:delete'
   ],
@@ -213,6 +215,7 @@ export const rolesMap: Record<RoleType, string[]> = {
     'base:read',
     'table:read',
     'field:read',
+    'webhook:touch',
     'view:create', 'view:read', 'view:update', 'view:delete',
     'record:create', 'record:read', 'record:update', 'record:delete'
   ],

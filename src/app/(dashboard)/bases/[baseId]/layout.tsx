@@ -6,7 +6,7 @@ import { getCurrentUser } from "@/lib/server";
 import { redirect } from "next/navigation";
 import SchemaServer from "@/lib/schema-server";
 import AppInitializer from "@/components/app-initializer";
-import { getRole } from "@/lib/utils";
+import { allows, getRole } from "@/lib/utils";
 import Loading from "@/components/loading";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { BaseSidebar } from "@/components/blocks/sidebar/base-sidebar";
@@ -38,6 +38,7 @@ export default async function Layout({
     redirect('/404');
   }
 
+  await schema.loadWebhooks(['action', 'bulk-action']);
   const sidebarItems = schema?.sidebar() ?? [];
 
   return (
@@ -58,6 +59,7 @@ export default async function Layout({
         <SidebarProvider>
           <BaseSidebar
             tables={sidebarItems}
+            showSetting={allows(schema.getRole(), 'base:update')}
             showCreate={schema.isDefaultProvider()}
           >
             <BaseSelector params={params} />

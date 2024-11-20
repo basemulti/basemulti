@@ -38,6 +38,8 @@ export async function editRecord({
   baseId, tableName, id, data
 }: {
   baseId: string, tableName: string, id: string, data: any
+}, options?: {
+  originalPath?: string;
 }) {
   const user = await getCurrentUser() as User;
   const schema = await SchemaServer.load(baseId);
@@ -63,15 +65,31 @@ export async function editRecord({
     data.updated_by = user.id;
   }
 
-  await schema.query(tableName).where(
-    schema.getPrimaryKey(tableName) as string,
-    id
-  ).update(data);
-  // const record = await schema.query(table).where('id', id).firstOrFail();
-  // Object.entries(data).forEach(([key, value]) => {
-  //   record.setAttribute(key, value);
-  // });
-  // await record.save();
+  const record = await schema.query(tableName).where('id', id).first();
+  if (!record) {
+    return {
+      error: `Record "${id}" not found`
+    };
+  }
+
+  await record?.update(data);
+
+  options?.originalPath && revalidatePath(options?.originalPath);
+
+  // webhook
+  await schema.loadWebhooks(['record.update']);
+
+  if (schema.hasWebhooks(tableName)) {
+    try {
+      await schema.loadRecordRelations(record, tableName);
+      await schema.touchWebhooks(tableName, 'record.update', [record.toData()]);
+    } catch (e: any) {
+      return {
+        error: `Record update successfully, ${e.message}`
+      }
+    }
+  }
+
   return {};
 }
 
@@ -86,6 +104,7 @@ export async function createRecord({
 }) {
   const user = await getCurrentUser() as User;
   const schema = await SchemaServer.load(baseId);
+
   if (!schema) {
     return {
       error: 'Base not found'
@@ -110,7 +129,23 @@ export async function createRecord({
   }
   
   const record = await schema.query(tableName).create(data);
+
   options?.originalPath && revalidatePath(options?.originalPath);
+
+  // webhook
+  await schema.loadWebhooks(['record.create']);
+
+  if (schema.hasWebhooks(tableName)) {
+    try {
+      await record.refresh();
+      await schema.loadRecordRelations(record, tableName);
+      await schema.touchWebhooks(tableName, 'record.create', [record.toData()]);
+    } catch (e: any) {
+      return {
+        error: `Record create successfully, ${e.message}`
+      }
+    }
+  }
 
   return {
     record: record.toData(),
@@ -152,8 +187,27 @@ export async function deleteRecord({
     };
   }
 
-  await schema.query(tableName).where(primaryKey, id).delete();
-  options?.originalPath && revalidatePath(options?.originalPath);
+  const record = await schema.query(tableName).where(primaryKey, id).first();
+
+  if (record) {
+    await record.delete();
+    options?.originalPath && revalidatePath(options?.originalPath);
+
+    // webhook
+    await schema.loadWebhooks(['record.delete']);
+
+    if (schema.hasWebhooks(tableName)) {
+      try {
+        await schema.loadRecordRelations(record, tableName);
+        await schema.touchWebhooks(tableName, 'record.delete', [record.toData()]);
+      } catch (e: any) {
+        return {
+          error: `Record delete successfully, ${e.message}`
+        }
+      }
+    }
+  }
+
   return {};
 }
 

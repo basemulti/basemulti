@@ -13,10 +13,11 @@ import QuickActions from "@/components/quick-actions";
 import { useParams } from "next/navigation";
 import { NavMain } from "./nav-main";
 
-export function BaseSidebar({ children, tables, showCreate, ...props }: React.ComponentProps<typeof Sidebar> & {
+export function BaseSidebar({ children, tables, showCreate, showSetting, ...props }: React.ComponentProps<typeof Sidebar> & {
   children: React.ReactNode;
   tables: any;
   showCreate: boolean;
+  showSetting: boolean;
 }) {
   const { baseId }: {
     baseId: string;
@@ -27,7 +28,10 @@ export function BaseSidebar({ children, tables, showCreate, ...props }: React.Co
       <SidebarHeader>
         {children}
         <QuickActions />
-        <NavMain baseId={baseId} />
+        <NavMain
+          baseId={baseId}
+          showSetting={showSetting}
+        />
       </SidebarHeader>
       <SidebarContent className="">
         <NavTables

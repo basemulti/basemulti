@@ -11,24 +11,23 @@ import {
 import { CopyIcon, Maximize2Icon, MoreHorizontal, Settings2, SquareSquareIcon, Trash } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import { useState } from "react";
-import axios from 'axios';
-import { IconProps } from "@/components/icon";
 import { deleteRecord } from "@/actions/record";
 import { useRouter } from "next-nprogress-bar";
 import { toast } from "sonner";
 import { useGlobalStore } from "@/store/global";
 import { useTranslations } from "next-intl";
-import { ActionType } from "@/lib/schema-builder";
+import { WebhookSchemaType } from "@/lib/schema-builder";
+import { touchWebhook } from "@/actions/webhook";
 
 interface CellActionProps {
   data: any;
   meta?: any;
-  actions?: Record<string, ActionType>;
+  actions?: WebhookSchemaType[];
   actionsDisabled?: boolean;
   primaryKey: string;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = {}, actionsDisabled, primaryKey }) => {
+export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = [], actionsDisabled, primaryKey }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -39,10 +38,11 @@ export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = {}
     tableName: string;
   } = useParams();
   const tableName = decodeURIComponent(paramTableName);
-  const [confirmAction, setConfirmAction] = useState<ActionType>();
   const t = useTranslations('GridView.Actions');
+  // const schema = useSchemaStore(store => store.schema);
 
   const onConfirm = () => {
+    setLoading(true);
     deleteRecord({
       baseId,
       tableName,
@@ -62,35 +62,30 @@ export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = {}
     })
     .finally(() => {
       setOpen(false);
+      setLoading(false);
     });
   };
 
-  const touchWebhook = (action: ActionType) => () => {
-    if (loading) {
-      return;
-    }
+  const handleTouchWebhook = (action: WebhookSchemaType) => {
+    toast.promise(touchWebhook({
+      baseId: baseId,
+      tableName: tableName,
+      webhookId: action.id,
+      params: {
+        recordIds: [data[primaryKey]],
+      },
+    }), {
+      loading: t('loading'),
+      success: (result) => {
+        if (result.error) {
+          throw new Error(result.error);
+        }
 
-    setLoading(true);
-
-    axios.post(action.webhook, data)
-      .then(response => {
-        setTimeout(() => {
-          setLoading(false);
-          setOpen(false)
-        }, 3000)
-      })
-      .catch((err) => {
-        setTimeout(() => {
-          setLoading(false);
-          setOpen(false)
-        }, 3000)
-      })
-      .finally(() => {
-        // setLoading(false);
-      });
+        return t('success');
+      },
+      error: e => e.message,
+    });
   };
-
-  const actionsArray = Object.keys(actions).map(key => ({ key: key, ...actions[key]}));
 
   if (actionsDisabled) {
     return null;
@@ -101,7 +96,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = {}
       <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
-        onConfirm={confirmAction ? touchWebhook(confirmAction) : onConfirm}
+        onConfirm={onConfirm}
         loading={loading}
       />
       <DropdownMenu modal={false}>
@@ -138,13 +133,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data, meta, actions = {}
           <DropdownMenuItem className="text-red-500" onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4 text-red-500" /> {t('delete')}
           </DropdownMenuItem>
-          {(actionsArray.length > 0) && <DropdownMenuSeparator />}
-          {actionsArray.map((action) => {
-            return <DropdownMenuItem key={action.label} onClick={() => {
-              setConfirmAction(action);
-              alert(action.key)
-              setOpen(true)
-            }}>
+          {(actions.length > 0) && <DropdownMenuSeparator />}
+          {actions.map((action) => {
+            return <DropdownMenuItem key={action.id} onClick={() => handleTouchWebhook(action)}>
               <Settings2 className="mr-2 h-4 w-4"/> {action.label}
             </DropdownMenuItem>
           })}

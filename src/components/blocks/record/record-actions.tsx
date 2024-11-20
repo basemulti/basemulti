@@ -1,6 +1,6 @@
 'use client';
 
-import { FilesIcon, LinkIcon, MoreHorizontalIcon, TrashIcon } from "lucide-react";
+import { FilesIcon, LinkIcon, MoreHorizontalIcon, Settings2Icon, TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -14,6 +14,9 @@ import { sleep, url } from "@/lib/utils";
 import { AlertModal } from "@/components/modal/alert-modal";
 import { deleteRecord } from "@/actions/record";
 import { useTranslations } from "next-intl";
+import { useSchemaStore } from "@/store/base";
+import { WebhookSchemaType } from "@/lib/schema-builder";
+import { touchWebhook } from "@/actions/webhook";
 
 export default function RecordActions({ baseId, tableName, recordId, size, onDelete }: {
   baseId: string;
@@ -26,6 +29,14 @@ export default function RecordActions({ baseId, tableName, recordId, size, onDel
   const [deleting, setDeleting] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('Record.Actions');
+  const schema = useSchemaStore(store => store.schema);
+  const actions: WebhookSchemaType[] = [];
+  const webhooks = schema?.getWebhooks(tableName);
+  Object.values(webhooks || {}).forEach((webhook) => {
+    if (webhook?.type === 'action') {
+      actions.push(webhook);
+    }
+  });
 
   const handleDeleteRecord = () => {
     if (deleting) return;
@@ -51,6 +62,27 @@ export default function RecordActions({ baseId, tableName, recordId, size, onDel
       setOpen(false);
     });
   }
+
+  const handleTouchWebhook = (action: WebhookSchemaType) => {
+    toast.promise(touchWebhook({
+      baseId: baseId,
+      tableName: tableName,
+      webhookId: action.id,
+      params: {
+        recordIds: [recordId],
+      },
+    }), {
+      loading: t('loading'),
+      success: (result) => {
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        return t('success');
+      },
+      error: e => e.message,
+    });
+  };
 
   return (
     <div className="flex flex-row items-center gap-2">
@@ -80,18 +112,15 @@ export default function RecordActions({ baseId, tableName, recordId, size, onDel
           </DropdownMenuItem> */}
           <DropdownMenuItem className="text-red-500" onClick={() => {
             setOpen(true);
-            // toast.promise(
-            //   sleep(3000),
-            //   {
-            //     loading: "Deleting...",
-            //     success: "Deleted",
-            //     error: "Failed to delete",
-            //   }
-            // );
           }}>
             <TrashIcon className="mr-2 h-4 w-4 text-red-500" /> {t('delete')}
           </DropdownMenuItem>
-          {/* <DropdownMenuSeparator /> */}
+          {(actions.length > 0) && <DropdownMenuSeparator />}
+          {actions.map((action) => {
+            return <DropdownMenuItem key={action.id} onClick={() => handleTouchWebhook(action)}>
+              <Settings2Icon className="mr-2 h-4 w-4"/> {action.label}
+            </DropdownMenuItem>
+          })}
         </DropdownMenuContent>
       </DropdownMenu>
       <AlertModal

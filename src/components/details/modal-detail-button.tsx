@@ -93,6 +93,8 @@ export default function ModalDetailButton({ baseId, tableName, recordId, childre
         tableName,
         id: recordId,
         data: pick(data, [...Object.keys(dirtyFields)])
+      }, {
+        originalPath: `/bases/${baseId}/tables/${tableName}`,
       })
       .then(result => {
         if (result.error) {
@@ -100,7 +102,6 @@ export default function ModalDetailButton({ baseId, tableName, recordId, childre
         }
   
         toast.success("Update successful.");
-        router.refresh();
       })
       .catch(e => {
         toast.error("Uh oh! Something went wrong.", {

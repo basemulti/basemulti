@@ -57,6 +57,16 @@ export type ViewType = {
   filters?: FiltersType;
 }
 
+export type WebhookSchemaType = {
+  id: string;
+  label: string;
+  endpoint: string;
+  method: string;
+  type: string;
+  headers?: Record<string, string>;
+  active: boolean;
+}
+
 export type RelationSchema = {
   name: string;
   label: string;
@@ -81,6 +91,7 @@ export type TableSchemaType = {
   search?: string[];
   actions?: Record<string, ActionType>;
   views: Record<string, ViewType>;
+  webhooks?: Record<string, WebhookSchemaType>;
 }
 
 export type ConnectionType = {
@@ -320,6 +331,24 @@ export default class SchemaBuilder {
       name: tableName,
       label: tableSchema.label || startCase(tableName),
     };
+  }
+
+  hasWebhook(tableName: string, webhookId: string) {
+    const tableSchema = this.getTableSchema(tableName);
+    return tableSchema?.webhooks?.[webhookId] !== undefined;
+  }
+
+  hasWebhooks(tableName: string) {
+    const tableSchema = this.getTableSchema(tableName);
+    return tableSchema?.webhooks !== undefined && Object.keys(tableSchema?.webhooks).length > 0;
+  }
+
+  getWebhook(tableName:string, webhookId: string) {
+    return this.getTableSchema(tableName).webhooks?.[webhookId];
+  }
+
+  getWebhooks(tableName:string) {
+    return this.getTableSchema(tableName).webhooks;
   }
 
   getFieldSchema(tableName: string, fieldName: string, withDefaultUI: boolean = true): FieldSchema {

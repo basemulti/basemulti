@@ -9,7 +9,7 @@ import { CaretDownIcon, CaretSortIcon, CaretUpIcon } from "@radix-ui/react-icons
 import Link from "next/link";
 import { Maximize2Icon } from "lucide-react";
 import { FieldIcon } from "@/components/field-types";
-import SchemaBuilder, { getUISchema } from "@/lib/schema-builder";
+import SchemaBuilder, { getUISchema, WebhookSchemaType } from "@/lib/schema-builder";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import ModalDetail from "@/components/details/modal-detail";
 import { useGlobalStore } from "@/store/global";
@@ -91,6 +91,13 @@ export const getColumns = (tableName: string, schema?: SchemaBuilder, canUpdate?
   //   enableHiding: false,
   // })
 
+  const actions: WebhookSchemaType[] = [];
+  Object.entries(table?.webhooks || {}).forEach(([webhookId, webhook]) => {
+    if (webhook?.type === 'action') {
+      actions.push(webhook);
+    }
+  });
+
   newColumns.unshift({
     id: selectId,
     header: ({ table }) => (
@@ -113,7 +120,7 @@ export const getColumns = (tableName: string, schema?: SchemaBuilder, canUpdate?
             tableName: tableName,
           }}
           primaryKey={primaryKeyName as string}
-          actions={table?.actions || {}}
+          actions={actions}
           actionsDisabled={actionsDisabled}
         />
         <Checkbox

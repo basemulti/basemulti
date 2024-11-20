@@ -27,6 +27,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { usePathname } from "next/navigation";
 
 export default function ModalDetail({ disabled }: {
   // baseId: string;
@@ -44,6 +45,7 @@ export default function ModalDetail({ disabled }: {
     allows: store.allows,
   }));
   const t = useTranslations('Record');
+  const pathname = usePathname();
 
   const [data, setData] = useState<any>(null);
   const { schema } = useSchemaStore(store => ({
@@ -60,7 +62,6 @@ export default function ModalDetail({ disabled }: {
         }
 
         setData(result.data);
-        console.log('getRecord', result.data)
         form.reset(pick(result.data, Object.keys(schema?.getFields(detailInfo.tableName) || { })))
       }).catch(e => {});
     }
@@ -91,6 +92,8 @@ export default function ModalDetail({ disabled }: {
       tableName,
       id: recordId,
       data: pick(data, [...Object.keys(dirtyFields)])
+    }, {
+      originalPath: pathname,
     })
     .then(result => {
       if (result.error) {
@@ -98,7 +101,6 @@ export default function ModalDetail({ disabled }: {
       }
 
       toast.success("Update successful.");
-      router.refresh();
     })
     .catch(e => {
       toast.error("Uh oh! Something went wrong.", {
