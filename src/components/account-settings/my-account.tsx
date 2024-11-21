@@ -92,9 +92,9 @@ export default function MyAccount() {
       <div className="text-base font-medium">{t('title')}</div>
       <Separator className="mt-3 mb-4" />
       <div className="flex items-center gap-4">
-        <Avatar className="w-14 h-14">
+        <Avatar className="w-14 h-14 rounded-lg">
           <AvatarImage src={user.avatar} />
-          <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+          <AvatarFallback className="text-xl rounded-xl font-medium">{getInitials(user.name)}</AvatarFallback>
         </Avatar>
         <div className="space-y-1">
           <div className="text-xs text-muted-foreground">{t('preferred_name')}</div>

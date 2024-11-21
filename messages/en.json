@@ -77,7 +77,9 @@
       "text": "Create a workspace",
       "label": "Label",
       "create": "Create"
-    }
+    },
+    "no_databases": "No databases",
+    "no_databases_description": "You don't have any databases yet. Create one to get started."
   },
   "CreateBase": {
     "modal_title": "Create base",
@@ -152,7 +154,8 @@
     "create_base": "Create",
     "rename": "Rename",
     "settings": "Settings",
-    "delete": "Delete"
+    "delete": "Delete",
+    "share": "Share"
   },
   "BaseCard": {
     "rename": "Rename",
@@ -166,6 +169,8 @@
     "settings": "Settings",
     "ask_ai": "Ask AI",
     "more": "More",
+    "no_tables": "No tables",
+    "create_table": "Create table",
     "TableActions": {
       "copy_link": "Copy link",
       "hide_table": "Hide table",
@@ -334,6 +339,8 @@
         "save_order": "Save order",
         "reset_order": "Reset order",
         "select_prompt": "Select a relation to edit",
+        "no_relations": "No relations",
+        "no_relations_description": "Relations are used to link records together. For example, you can link a user to their posts.",
         "Editor": {
           "name": "Name",
           "label": "Label",

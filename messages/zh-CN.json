@@ -77,7 +77,9 @@
       "text": "创建工作区",
       "label": "名称",
       "create": "创建"
-    }
+    },
+    "no_databases": "没有数据库",
+    "no_databases_description": "您还没有任何数据库。请创建一个数据库以开始使用。"
   },
   "CreateBase": {
     "modal_title": "创建数据库",
@@ -152,7 +154,8 @@
     "create_base": "创建",
     "rename": "重命名",
     "settings": "设置",
-    "delete": "删除"
+    "delete": "删除",
+    "share": "分享"
   },
   "BaseCard": {
     "rename": "重命名",
@@ -166,6 +169,8 @@
     "settings": "设置",
     "ask_ai": "Ask AI",
     "more": "更多",
+    "no_tables": "没有表格",
+    "create_table": "创建表格",
     "TableActions": {
       "copy_link": "复制链接",
       "hide_table": "隐藏表格",
@@ -334,6 +339,8 @@
         "save_order": "保存排序",
         "reset_order": "重置排序",
         "select_prompt": "选择关联进行编辑",
+        "no_relations": "没有关联",
+        "no_relations_description": "关联用于将记录链接在一起。例如，您可以将用户链接到他们的帖子。",
         "Editor": {
           "name": "关联名",
           "label": "名称",

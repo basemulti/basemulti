@@ -23,7 +23,7 @@ export async function signUp(email: string, password: string) {
   await user.save();
 
   const workspace = new Workspace;
-  workspace.label = `${user.name}'s Workspace`;
+  workspace.label = user.name;
   await workspace.save();
 
   await user?.related('workspaces').attach(workspace.id, {

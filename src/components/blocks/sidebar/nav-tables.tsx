@@ -1,6 +1,6 @@
 'use client';
 
-import {  EllipsisIcon, PlusIcon } from "lucide-react";
+import {  EllipsisIcon, PlusIcon, TableIcon } from "lucide-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import {
@@ -18,6 +18,7 @@ import TableIconSelector from "@/components/table-icon-selector";
 import NavTableOption from "./nav-table-option";
 import { useTranslations } from "next-intl";
 import CreateTable from "@/components/create-table";
+import { Button } from "@/components/ui/button";
 
 type NavTablesProps = {
   items: TableNavItem[];
@@ -61,6 +62,15 @@ export function NavTables({ items, showCreate }: NavTablesProps) {
         </CreateTable>}
       </SidebarGroupLabel>
       <SidebarMenu>
+        {visibleItems.length === 0 && hiddenItems.length === 0 && <div className="w-full flex flex-col items-center mt-10 gap-2">
+          <TableIcon className="w-6 h-6 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">{t('no_tables')}</span>
+          {showCreate && <CreateTable baseId={baseId}>
+          <Button variant={'outline'} className="px-2 h-7 bg-background text-xs">
+            {t('create_table')}
+          </Button>
+        </CreateTable>}
+        </div>}
         {visibleItems.map((item: any) => (
           <SidebarMenuItem key={item.id}>
             <SidebarMenuButton asChild isActive={path.startsWith(item.href)}>

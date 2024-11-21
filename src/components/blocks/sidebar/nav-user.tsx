@@ -112,7 +112,9 @@ export function NavUser() {
                 <BadgeCheck className="h-4 w-4 text-muted-foreground" />
                 {t('account')}
               </DropdownMenuItem>
-              <DropdownMenuItem className="gap-2 h-8 justify-between group">
+              <DropdownMenuItem className="gap-2 h-8 justify-between group" onSelect={() => {
+                window.open('https://github.com/basemulti/basemulti');
+              }}>
                 <div className="flex items-center gap-2">
                   <GithubIcon className="h-4 w-4 text-muted-foreground" />
                   Github

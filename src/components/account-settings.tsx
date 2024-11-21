@@ -6,7 +6,6 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import { CircleUserIcon, KeyIcon, Settings2Icon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useGlobalStore } from "@/store/global";
 import Loading from "@/components/loading";
 import { useState } from "react";
@@ -62,16 +61,6 @@ export default function AccountSettings({ open, setOpen }: {
           <div className="">
             <div className="text-muted-foreground text-xs p-1 mb-2">{t('modal_title')}</div>
             <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2 px-2">
-                <Avatar className="w-6 h-6 border border-border">
-                  <AvatarImage src="https://avatars.githubusercontent.com/u/1013686qwe?v=4" />
-                  <AvatarFallback className="text-xs font-medium">{getInitials(user.name)}</AvatarFallback>
-                </Avatar>
-                <div className="">
-                  <div className="text-sm">{user.name}</div>
-                  <div className="text-xs text-muted-foreground">{user.email}</div>
-                </div>
-              </div>
               <div className={cn(
                 "text-sm h-8 flex items-center gap-2 rounded-md hover:bg-sidebar px-2 cursor-pointer",
                 tab === 'account' && 'bg-sidebar'

@@ -99,13 +99,13 @@ export default function CreateBase() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        <div className="w-52 flex flex-col items-center gap-4 rounded-lg hover:shadow border border-border px-4 py-5 cursor-not-allowed opacity-60">
+        {/* <div className="w-52 flex flex-col items-center gap-4 rounded-lg hover:shadow border border-border px-4 py-5 cursor-not-allowed opacity-60">
           <LayoutTemplateIcon className="size-16" />
           <div className="flex flex-col items-center">
             <div className="font-bold text-center">{t('template_title')}</div>
             <span className="text-xs text-center">{t('template_description')}</span>
           </div>
-        </div>
+        </div> */}
         <div className="w-52 flex flex-col items-center gap-4 rounded-lg hover:shadow border border-border px-4 py-5 cursor-pointer" onClick={() => setExternalData(true)}>
           <UnplugIcon className="size-16" />
           <div className="flex flex-col items-center">
