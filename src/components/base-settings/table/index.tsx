@@ -105,7 +105,7 @@ export default function Index({ schema }: {
           </Button>
         </div>
       </div>
-      <div className="rounded-md border border-gray-200">
+      <div className="rounded-md border border-border">
         <div className="size-full flex flex-row">
           <ScrollArea className="h-[calc(100vh-200px)] flex-1">
             <div className="flex-1 divide-y border-b">

@@ -9,7 +9,7 @@ import Webhook from "@/components/table-settings/webhook";
 import TypeList from "@/components/table-settings/type-list";
 import SchemaServer from "@/lib/schema-server";
 import startCase from "lodash/startCase";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon, ClockIcon } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cache } from "react";
@@ -82,7 +82,8 @@ export default async function Page({ params, ...props }: PageProps) {
           webhooks={webhooks}
         />;
       default:
-        return <div className="size-full flex items-center justify-center">
+        return <div className="size-full flex flex-col items-center justify-center gap-4">
+          <ClockIcon className="size-10" />
           Coming soon
         </div>
     }

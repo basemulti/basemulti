@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { denies } from "@/lib/utils";
 import Bar from "@/components/bar";
 import Link from "next/link";
-import { ChevronRightIcon, DatabaseIcon } from "lucide-react";
+import { ChevronRightIcon, ClockIcon, DatabaseIcon } from "lucide-react";
 import BaseSchema from "@/components/base-settings/schema";
 import { getTranslations } from "next-intl/server";
 
@@ -80,7 +80,8 @@ export default async function Page({ params, ...props }: PageProps) {
 
         return <BaseSchema schema={schema.safe()} />;
       default:
-        return <div className="size-full flex items-center justify-center">
+        return <div className="size-full flex flex-col items-center justify-center gap-4">
+          <ClockIcon className="size-10" />
           Coming soon
         </div>
     }

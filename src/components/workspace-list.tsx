@@ -2,7 +2,7 @@
 
 import orderCollection from "lodash/orderBy";
 import { Button } from "@/components/ui/button";
-import { ArrowDownIcon, ArrowUpIcon, LayoutGridIcon, LayoutListIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, DatabaseIcon, LayoutGridIcon, LayoutListIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import CreateWorkspace from "@/components/create-workspace";
 import {
@@ -66,36 +66,29 @@ export default function WorkspaceList({ workspaces }: { workspaces: any }) {
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger asChild> */}
-              <Button variant={'ghost'} className="h-8 gap-2 px-2 focus-visible:ring-0" onClick={() => {
-                setViewFor(viewFor === 'base' ? 'workspace' : 'base')
-              }}>
-                {viewFor === 'base' ? <LayoutGridIcon className="size-4" /> : <LayoutListIcon className={cn("size-4")} />}
-                {t(viewFor === 'base' ? 'Tabs.base' : 'Tabs.workspace')}
-              </Button>
-            {/* </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuGroup>
-                <DropdownMenuItem className="cursor-pointer gap-2" onSelect={() => setViewFor('base')}>
-                  <LayoutGridIcon className="size-4" />
-                  Base
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer gap-2" onSelect={() => setViewFor('workspace')}>
-                  <LayoutListIcon className="size-4" />
-                  Workspace
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu> */}
+          <Button variant={'ghost'} className="h-8 gap-2 px-2 focus-visible:ring-0" onClick={() => {
+            setViewFor(viewFor === 'base' ? 'workspace' : 'base')
+          }}>
+            {viewFor === 'base' ? <LayoutGridIcon className="size-4" /> : <LayoutListIcon className={cn("size-4")} />}
+            {t(viewFor === 'base' ? 'Tabs.base' : 'Tabs.workspace')}
+          </Button>
         </div>
         <CreateWorkspace />
       </div>
     </div>
     <div className="overflow-y-scroll px-10 py-4 bg-muted/50 flex-1">
-      {viewFor === 'base' ? <div className="grid grid-cols-5 gap-4">
-        {bases.map(base => <BaseCard key={base.id} base={base} />)}
-      </div> : <div className="flex flex-col gap-4">
+      {viewFor === 'base' ? (bases.length > 0 ? <div className="grid grid-cols-5 gap-4">
+          {bases.map(base => <BaseCard key={base.id} base={base} />)}
+      </div> : <div className="size-full flex flex-col items-center justify-center gap-4">
+        <DatabaseIcon className="size-10" />
+        <div className="flex flex-col gap-1">
+          <div className="text-center font-semibold">{t('no_databases')}</div>
+          <div className="text-gray-500 text-sm text-center">{t('no_databases_description')}</div>
+        </div>
+        <Button variant={'outline'} className="h-8 px-3 bg-background" onClick={() => setViewFor('workspace')}>
+          显示所有工作区
+        </Button>
+      </div>) : <div className="flex flex-col gap-4">
         {sortedWorkspaces.map((workspace: any) => <WorkspaceCard key={workspace.id} workspace={workspace} />)}
       </div>}
     </div>

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { ScrollArea } from "../../ui/scroll-area";
 import { Button } from "../../ui/button";
 import { useCallback, useState } from "react";
-import { PlusIcon, SearchIcon } from "lucide-react";
+import { PlusIcon, SearchIcon, WaypointsIcon } from "lucide-react";
 import { sortObjectByKeys } from "@/lib/utils";
 import RelationEditor from "./relation-editor";
 import RelationItem from "./relation-item";
@@ -164,7 +164,8 @@ export default function Relation({ schema }: {
       <div className="rounded-md border border-gray-200">
         <div className="size-full flex flex-row">
           <ScrollArea className="h-[calc(100vh-200px)] flex-1">
-            <div className="flex-1 divide-y border-b">
+            {filteredRelations.length > 0 
+            ? <div className="flex-1 divide-y border-b">
               <DndContext
                 onDragEnd={onDragEnd}
               >
@@ -181,6 +182,17 @@ export default function Relation({ schema }: {
                 </SortableContext>
               </DndContext>
             </div>
+            : <div className="size-full flex flex-col items-center justify-center gap-4">
+              <WaypointsIcon className="size-10" />
+              <div className="flex flex-col gap-1">
+                <div className="text-center font-semibold">{t('no_relations')}</div>
+                <div className="text-gray-500 text-sm text-center">{t('no_relations_description')}</div>
+              </div>
+              <Button variant={'outline'} className={'h-8 gap-2'} onClick={handleShowCreate}>
+                <PlusIcon className="size-4" />
+                {t('create')}
+              </Button>
+            </div>}
           </ScrollArea>
           <div className="h-[calc(100vh-200px)] min-w-[400px] border-l border-l-gray-200 overflow-y-scroll">
             {renderPanel()}

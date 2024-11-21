@@ -115,7 +115,7 @@ export default function WorkspaceCard({ workspace }: {
           ? <Input
             ref={inputRef}
             defaultValue={optimisticLabel}
-            className="h-8 focus-visible:ring-0"
+            className="h-8 focus-visible:ring-0 flex-1"
             onBlur={handleBlurLabel}
             onKeyPress={handleKeyPress}
           />
@@ -123,6 +123,9 @@ export default function WorkspaceCard({ workspace }: {
           <div className="flex items-center gap-2">
             {allows(workspace.id, 'workspace', 'base:create') && <Link href={`/workspaces/${workspace.id}/create`} className={cn(buttonVariants({ variant: 'outline' }), "text-sm h-8 px-3")}>
               {t('create_base')}
+            </Link>}
+            {allows(workspace.id, 'workspace', 'workspace:update') && <Link href={`/workspaces/${workspace.id}/collaborators`} className={cn(buttonVariants({ variant: 'outline' }), "text-sm h-8 px-3")}>
+              {t('share')}
             </Link>}
             {allows(workspace.id, 'workspace', [
               'workspace:update',

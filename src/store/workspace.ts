@@ -15,7 +15,7 @@ export const useWorkspacesStore = create<State & Actions>()(persist(
   (set) => {
     return {
       orderBy: ['created_at', 'asc'],
-      viewFor: 'base',
+      viewFor: 'workspace',
 
       setOrderBy: (value: [string, 'desc' | 'asc']) => set({ orderBy: value }),
       setViewFor: (value: 'base' | 'workspace') => set({ viewFor: value }),
