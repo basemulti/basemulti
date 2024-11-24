@@ -1,3 +1,4 @@
+import { env } from '@/lib/env';
 import * as MysqlProvider from './mysql';
 import * as PostgresProvider from './postgres';
 import * as SqliteProvider from './sqlite';
@@ -5,8 +6,8 @@ import * as SqliteProvider from './sqlite';
 export const baseProviders: Record<string, ProviderType> = {};
 
 export function registerProvider(provider: ProviderType) {
-  const disabled = process.env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(',').includes(provider.name);
-  console.log(`Registering provider`, process.env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(','), provider.name, disabled);
+  const disabled = env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(',').includes(provider.name);
+  console.log(`Registering provider`, env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(','), provider.name, disabled);
   if (disabled) {
     return;
   }

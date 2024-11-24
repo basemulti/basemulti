@@ -1,17 +1,19 @@
 import { NextResponse } from 'next/server';
 import AWS from 'aws-sdk';
+import { env } from '@/lib/env';
 
 const s3 = new AWS.S3({
-  region: process.env.AWS_REGION || 'us-east-1',
-  accessKeyId: process.env.AWS_AK,
-  secretAccessKey: process.env.AWS_SK,
+  endpoint: env.AWS_ENDPOINT,
+  region: env.AWS_REGION || 'us-east-1',
+  accessKeyId: env.AWS_AK,
+  secretAccessKey: env.AWS_SK,
 });
 
 const getUploadURL = async (type: string, name: string) => {
   const file = parseInt(String(Math.random() * 10000000));
   const params = {
-    Bucket: 'tg-games.com',
-    Key: 'static/' + name,
+    Bucket: env.AWS_BUCKET,
+    Key: env.AWS_DIRECTORY ? env.AWS_DIRECTORY + '/' + name : name,
     ContentType: type,
   };
   

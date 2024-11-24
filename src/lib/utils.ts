@@ -4,6 +4,7 @@ import { NavItem } from "@/types";
 import { customAlphabet } from 'nanoid';
 import type { RoleType } from "./types";
 import packageJson from '@/../package.json';
+import { env } from "./env";
 
 export const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 16);
 
@@ -265,7 +266,7 @@ export function version() {
 }
 
 export function url(path: string) {
-  return process.env.NEXT_PUBLIC_URL + '/' + path;
+  return env.NEXT_PUBLIC_URL + '/' + path;
 }
 
 export const roleLevels: Record<RoleType, number> = {

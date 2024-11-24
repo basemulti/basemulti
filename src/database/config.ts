@@ -1,29 +1,30 @@
+import { env } from "@/lib/env";
 import { APP_NAME } from "@/lib/utils";
 
 const connections = {
   sqlite: {
     client: 'sqlite3',
     connection: {
-      filename: process.env.DB_DATABASE as string,
+      filename: env.DB_DATABASE as string,
     },
     useNullAsDefault: true,
   },
   mysql: {
     client: 'mysql2',
     connection: {
-      host: process.env.DB_HOST as string,
-      user: process.env.DB_USERNAME as string,
-      password: process.env.DB_PASSWORD as string,
-      database: process.env.DB_DATABASE as string,
+      host: env.DB_HOST as string,
+      user: env.DB_USERNAME as string,
+      password: env.DB_PASSWORD as string,
+      database: env.DB_DATABASE as string,
     }
   },
   postgres: {
     client: 'pg',
     connection: {
-      host: process.env.DB_HOST as string,
-      user: process.env.DB_USERNAME as string,
-      password: process.env.DB_PASSWORD as string,
-      database: process.env.DB_DATABASE as string,
+      host: env.DB_HOST as string,
+      user: env.DB_USERNAME as string,
+      password: env.DB_PASSWORD as string,
+      database: env.DB_DATABASE as string,
     }
   }
 };
@@ -33,7 +34,7 @@ type DatabaseConfig = {
   connection: any;
 }
 
-const config: DatabaseConfig = connections[process.env.DB_DRIVER as keyof typeof connections] ?? {
+const config: DatabaseConfig = connections[env.DB_DRIVER as keyof typeof connections] ?? {
   client: 'sqlite3',
   connection: {
     filename: `./${APP_NAME}.sqlite`,

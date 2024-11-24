@@ -1,9 +1,10 @@
 import { getIronSession, SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 import { appString } from "./utils";
+import { env } from "./env";
 
 export const sessionOptions: SessionOptions = {
-  password: process.env.BASEMULTI_KEY as string,
+  password: env.BASEMULTI_KEY as string,
   cookieName: appString("cookie"),
   cookieOptions: {
     httpOnly: true,
