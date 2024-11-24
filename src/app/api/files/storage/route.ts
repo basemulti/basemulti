@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
+import { env } from "@/lib/env";
 
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/storage");
 

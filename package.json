@@ -50,7 +50,7 @@
     "autoprefixer": "10.4.15",
     "aws-sdk": "^2.1634.0",
     "axios": "^1.6.8",
-    "bcrypt": "^5.1.1",
+    "bcrypt-ts": "^5.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^1.0.0",
@@ -97,7 +97,6 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
     "@types/lodash": "^4.17.13",
     "@types/lodash.unset": "^4.5.9",
     "@types/markdown-it": "^14.0.1",

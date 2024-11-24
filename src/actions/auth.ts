@@ -1,7 +1,7 @@
 'use server'
 
 import { User, Workspace } from "@/database";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt-ts";
 import { getCurrentUser, getSession } from "@/lib/server";
 import { redirect } from "next/navigation";
 

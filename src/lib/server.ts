@@ -7,8 +7,9 @@ import { getIronSession, SessionOptions } from "iron-session";
 import { cookies } from "next/headers";
 import { cache } from 'react';
 import { appString } from './utils';
+import { env } from './env';
 
-const key = crypto.createHash('sha256').update(process.env.BASEMULTI_KEY as string).digest();
+const key = crypto.createHash('sha256').update(env.BASEMULTI_KEY as string).digest();
 
 export function encrypt(obj: any): string {
   let text = JSON.stringify(obj);
@@ -108,12 +109,12 @@ export async function databaseInspector(provider: string, connection: any) {
 }
 
 export const sessionOptions: SessionOptions = {
-  password: process.env.BASEMULTI_KEY as string,
+  password: env.BASEMULTI_KEY as string,
   cookieName: appString("cookie"),
   cookieOptions: {
     httpOnly: true,
     // secure only works in `https` environments
-    // if your localhost is not on `https`, then use: `secure: process.env.NODE_ENV === "production"`
+    // if your localhost is not on `https`, then use: `secure: env.NODE_ENV === "production"`
     secure: process.env.NODE_ENV === "production",
   },
 };

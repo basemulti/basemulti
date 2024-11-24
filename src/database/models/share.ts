@@ -1,5 +1,6 @@
 import { Attribute } from "sutando";
 import Model from "./model";
+import { env } from "@/lib/env";
 
 export default class Share extends Model {
   table = 'shares';
@@ -16,7 +17,7 @@ export default class Share extends Model {
 
   attributeShareLink() {
     return Attribute.make({
-      get: (value: any, attribute: any) => `${process.env.NEXT_PUBLIC_URL}/shares/${attribute.id}`
+      get: (value: any, attribute: any) => `${env.NEXT_PUBLIC_URL}/shares/${attribute.id}`
     })
   }
 }

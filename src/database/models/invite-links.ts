@@ -1,6 +1,7 @@
 import { RoleType } from "@/lib/types";
 import Model from "./model";
 import { Attribute } from "sutando";
+import { env } from "@/lib/env";
 
 export default class InviteLink extends Model {
   table = 'invite_links';
@@ -16,7 +17,7 @@ export default class InviteLink extends Model {
 
   attributeLink() {
     return Attribute.make({
-      get: (value: any, attribute: any) => `${process.env.NEXT_PUBLIC_URL}/invite?id=${attribute.id}&code=${attribute.code}`
+      get: (value: any, attribute: any) => `${env.NEXT_PUBLIC_URL}/invite?id=${attribute.id}&code=${attribute.code}`
     });
   }
 }
