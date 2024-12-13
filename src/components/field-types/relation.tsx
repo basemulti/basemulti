@@ -92,7 +92,7 @@ export function Editor({ name, schema, originalData, disabled, baseId, tableName
       limit: 15,
     }],
     queryFn: async () => {
-      const response = await axios.get(`/api/bases/${baseId}/tables/${relationSchema.table}?search_field=${q.fieldName}&search_q=${q.value}&page=${page}`);
+      const response = await axios.get(`/api/bases/${baseId}/tables/${relationSchema.table}/records?search_field=${q.fieldName}&search_q=${q.value}&page=${page}`);
       return response.data;
     },
     enabled: (open && !!relationSchema),

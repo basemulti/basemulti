@@ -6,6 +6,7 @@ import Field from "@/components/table-settings/field";
 import Graph from "@/components/table-settings/graph/graph";
 import Relation from "@/components/table-settings/relation";
 import Webhook from "@/components/table-settings/webhook";
+import Api from "@/components/table-settings/api";
 import TypeList from "@/components/table-settings/type-list";
 import SchemaServer from "@/lib/schema-server";
 import startCase from "lodash/startCase";
@@ -81,6 +82,8 @@ export default async function Page({ params, ...props }: PageProps) {
           schema={schema.safe()}
           webhooks={webhooks}
         />;
+      case 'api':
+        return <Api />; 
       default:
         return <div className="size-full flex flex-col items-center justify-center gap-4">
           <ClockIcon className="size-10" />

@@ -86,6 +86,7 @@ export default function LocaleSelector({ type = 'button', align }: {
               <CommandItem
                 value={language.label}
                 key={language.value}
+                className="cursor-pointer"
                 onSelect={() => {
                   onChange(language.value)
                 }}

@@ -69,7 +69,9 @@ export default function Webhook({ schema, webhooks }: {
             : <div className={cn(
               'size-full flex flex-col items-center justify-center gap-4',
             )}>
-              <WebhookIcon className="size-10" />
+              <div className="bg-muted rounded-md p-2">
+                <WebhookIcon className="size-8 text-muted-foreground" />
+              </div>
               <div className="flex flex-col gap-1">
                 <div className="text-center font-semibold">{t('no_webhooks')}</div>
                 <div className="text-gray-500 text-sm text-center">{t('no_webhooks_description')}</div>

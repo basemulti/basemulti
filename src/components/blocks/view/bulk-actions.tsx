@@ -32,7 +32,7 @@ export default function BulkActions({ baseId, tableName, rows, actions = [], pri
     }
 
     const filters = [['where', [primaryKey, 'in', rows.map((row: any) => row[primaryKey])]]];
-    window.location.href = `/api/bases/${baseId}/tables/${tableName}/export?filters=${btoa(JSON.stringify(filters))}`;
+    window.open(`/api/bases/${baseId}/tables/${tableName}/export?filters=${btoa(JSON.stringify(filters))}`, '_blank');
   }
 
   const handleDeleteSelected = () => {

@@ -149,6 +149,9 @@ importers:
       holy-loader:
         specifier: ^2.3.1
         version: 2.3.8(react@18.3.1)
+      hono:
+        specifier: ^4.6.12
+        version: 4.6.12
       iron-session:
         specifier: ^8.0.3
         version: 8.0.3
@@ -2507,6 +2510,10 @@ packages:
     resolution: {integrity: sha512-EhdAbXSuZtEc5z0Ta1PAgJXr0t/9lfOWt8tl4fjObGl7ObYLESL4218VHR/zPcE+ibyALnUf9JgAIeEDyqKCDw==}
     peerDependencies:
       react: '>= 16.0.0'
+
+  hono@4.6.12:
+    resolution: {integrity: sha512-eHtf4kSDNw6VVrdbd5IQi16r22m3s7mWPLd7xOMhg1a/Yyb1A0qpUFq8xYMX4FMuDe1nTKeMX5rTx7Nmw+a+Ag==}
+    engines: {node: '>=16.9.0'}
 
   html-dir-content@0.3.2:
     resolution: {integrity: sha512-a1EJZbvBGmmFwk9VxFhEgaHkyXUXKTkw0jr0FCvXKCqgzO1H0wbFQbbzRA6FhR3twxAyjqVc80bzGHEmKrYsSw==}
@@ -6611,6 +6618,8 @@ snapshots:
   holy-loader@2.3.8(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  hono@4.6.12: {}
 
   html-dir-content@0.3.2: {}
 

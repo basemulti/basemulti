@@ -20,6 +20,7 @@
   "NavUser": {
     "account": "Account",
     "logout": "Log out",
+    "docs": "Docs",
     "version": "Version {version}",
     "upgrade": "Upgrade to Pro"
   },
@@ -57,6 +58,22 @@
       "appearance_description": "Customize how looks on your device.",
       "language": "Language",
       "language_description": "Change the language used in the user interface."
+    },
+    "Tokens": {
+      "title": "API Tokens",
+      "create": "Create API Token",
+      "delete": "Delete",
+      "no_tokens": "No API tokens",
+      "no_tokens_description": "You don't have any API tokens yet. Create one to get started.",
+      "name": "Name",
+      "token": "Token",
+      "actions": "Actions",
+      "ModalCreateToken": {
+        "title": "Create API Token",
+        "name": "Name",
+        "submit": "Submit",
+        "cancel": "Cancel"
+      }
     }
   },
   "WorkspaceSidebar": {
@@ -385,6 +402,14 @@
           "cancel": "Cancel",
           "submit": "Submit"
         }
+      },
+      "API": {
+        "languages": "Languages",
+        "tokens": "Tokens",
+        "documents": "Documents",
+        "manage_tokens": "Manage Tokens",
+        "data_api": "Data API",
+        "docs_url": "https://docs.basemulti.com/developer/introduction.html"
       }
     }
   },
