@@ -14,9 +14,11 @@ const key = crypto.createHash('sha256').update(env.BASEMULTI_KEY as string).dige
 export function encrypt(obj: any): string {
   let text = JSON.stringify(obj);
   let iv = crypto.randomBytes(16);
+  // @ts-ignore
   let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
   let encrypted = cipher.update(text);
   
+  // @ts-ignore
   encrypted = Buffer.concat([encrypted, cipher.final()]);
   
   return iv.toString('hex') + ':' + encrypted.toString('hex');
@@ -27,12 +29,19 @@ export function decrypt(text: string): any {
   // @ts-ignore
   let iv = Buffer.from(textParts.shift(), 'hex');
   let encryptedText = Buffer.from(textParts.join(':'), 'hex');
+  // @ts-ignore
   let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+  // @ts-ignore
   let decrypted = decipher.update(encryptedText);
   
+  // @ts-ignore
   decrypted = Buffer.concat([decrypted, decipher.final()]);
   
   return JSON.parse(decrypted.toString());
+}
+
+export function hmac(key: string, data: string) {
+  return crypto.createHmac('sha256', key).update(data).digest('hex');
 }
 
 export const ProviderMap = {
