@@ -15,7 +15,7 @@ export default class User extends Model {
   email!: string;
   password!: string;
 
-  accessToken: PersonalAccessToken | null = null;
+  accessToken!: PersonalAccessToken | null;
 
   relationWorkspaces() {
     return this.belongsToMany(
