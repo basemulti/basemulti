@@ -21,7 +21,7 @@ export default function Api() {
       <APISidebar data={data} language={language} setLanguage={setLanguage} />
       <main className="flex flex-1 flex-col overflow-hidden">
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto p-4 pt-0 text-sm">
-          {data.map((item) => <div className={cn(
+          {data.map((item) => <div key={item.name} className={cn(
             "px-4 py-3 border border-border rounded-lg shadow-sm bg-muted/30",
             item.name === language ? 'block' : 'hidden'
           )}>

@@ -5,7 +5,7 @@ import { Base, removeManager, User } from "@/database";
 import SchemaBuilder, { SchemaType } from "@/lib/schema-builder";
 import SchemaServer from "@/lib/schema-server";
 import { encrypt, getCurrentUser } from "@/lib/server";
-import { DatabaseProviderType, ProviderType } from "@/lib/types";
+import { DatabaseProviderType } from "@/lib/types";
 import { denies, nanoid } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
