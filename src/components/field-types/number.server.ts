@@ -7,5 +7,5 @@ export function createField({
   fieldName: string;
   value: any;
 }) {
-  table.int(fieldName);
+  table.integer(fieldName);
 }

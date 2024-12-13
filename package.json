@@ -59,6 +59,7 @@
     "dotenv": "^16.4.5",
     "emoji-mart": "^5.6.0",
     "holy-loader": "^2.3.1",
+    "hono": "^4.6.12",
     "iron-session": "^8.0.3",
     "lodash": "^4.17.21",
     "lodash.unset": "^4.5.2",

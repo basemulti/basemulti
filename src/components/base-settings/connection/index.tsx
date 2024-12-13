@@ -209,6 +209,9 @@ export default function Index({ workspaceId, baseId, label, connection, provider
                   <ProviderConnectionEditor
                     name={baseProvider}
                     title={t('connection_details')}
+                    form={form}
+                    provider={baseProvider}
+                    connection={connection}
                   />
                 </div>
               </ScrollArea>

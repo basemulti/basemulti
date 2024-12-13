@@ -80,7 +80,9 @@ export default function WorkspaceList({ workspaces }: { workspaces: any }) {
       {viewFor === 'base' ? (bases.length > 0 ? <div className="grid grid-cols-5 gap-4">
           {bases.map(base => <BaseCard key={base.id} base={base} />)}
       </div> : <div className="size-full flex flex-col items-center justify-center gap-4">
-        <DatabaseIcon className="size-10" />
+        <div className="bg-muted rounded-md p-2">
+          <DatabaseIcon className="size-8 text-muted-foreground" />
+        </div>
         <div className="flex flex-col gap-1">
           <div className="text-center font-semibold">{t('no_databases')}</div>
           <div className="text-gray-500 text-sm text-center">{t('no_databases_description')}</div>

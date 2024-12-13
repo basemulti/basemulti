@@ -32,9 +32,11 @@ export async function updateConnection({
     return { error: 'Base not found' };
   }
 
-  base.provider = connection.provider;
-  base.setAttribute('connection', encrypt(connection.connection));
-  await base.save();
+  await Base.query().where('id', id).update({
+    provider: connection.provider,
+    connection: encrypt(connection.connection),
+  });
+  
   await removeManager(base.id);
 }
 

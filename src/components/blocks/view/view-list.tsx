@@ -105,7 +105,7 @@ export default function ViewList({ tabs, prefix }: ViewListProps) {
   };
 
   const handleExport = () => {
-    window.location.href = `/api/bases/${baseId}/tables/${tableName}/export?viewId=${tab}`;
+    window.open(`/api/bases/${baseId}/tables/${tableName}/export?viewId=${tab}`, '_blank');
   }
 
   return <Bar>

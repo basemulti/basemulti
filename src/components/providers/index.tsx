@@ -2,6 +2,7 @@ import { env } from '@/lib/env';
 import * as MysqlProvider from './mysql';
 import * as PostgresProvider from './postgres';
 import * as SqliteProvider from './sqlite';
+import { useEffect, useState } from 'react';
 
 export const baseProviders: Record<string, ProviderType> = {};
 
@@ -38,6 +39,11 @@ export function ProviderConnectionEditor({ name, ...props }: ConnectionEditorPro
   name: string;
 }) {
   const baseProvider = baseProviders[name];
+  const [, forceUpdate] = useState({});
+
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
 
   if (baseProvider?.ConnectionEditor) {
     return <baseProvider.ConnectionEditor {...props} />;

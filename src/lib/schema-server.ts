@@ -1,19 +1,23 @@
 // import { experimental_taintObjectReference } from "react";
 import SchemaBuilder from "./schema-builder";
-import { Base, getManager, Webhook } from "@/database";
+import { Base, getManager, User, Webhook } from "@/database";
 import type { Builder, Model } from "sutando";
-import { decrypt, getCurrentUser } from "./server";
+import { decrypt, getCurrentUser, hmac } from "./server";
 import axios from "axios";
 import dayjs from "dayjs";
 import { WebhookType } from "./types";
 
 export default class SchemaServer extends SchemaBuilder {
-  static async load(id: string) {
+  static async load(id: string, auth?: User | null) {
     if (!id) {
       return null;
     }
+
+    let user = auth;
+    if (!user) {
+      user = await getCurrentUser();
+    }
     
-    const user = await getCurrentUser();
     const base = await user?.getBase(id);
 
     if (!base) {

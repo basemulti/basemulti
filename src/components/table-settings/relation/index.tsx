@@ -183,7 +183,9 @@ export default function Relation({ schema }: {
               </DndContext>
             </div>
             : <div className="size-full flex flex-col items-center justify-center gap-4">
-              <WaypointsIcon className="size-10" />
+              <div className="bg-muted rounded-md p-2">
+                <WaypointsIcon className="size-8 text-muted-foreground" />
+              </div>
               <div className="flex flex-col gap-1">
                 <div className="text-center font-semibold">{t('no_relations')}</div>
                 <div className="text-gray-500 text-sm text-center">{t('no_relations_description')}</div>

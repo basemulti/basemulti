@@ -20,6 +20,7 @@
   "NavUser": {
     "account": "帐号",
     "logout": "退出",
+    "docs": "文档",
     "version": "版本 {version}",
     "upgrade": "升级方案"
   },
@@ -57,6 +58,22 @@
       "appearance_description": "自定义设备上的外观。",
       "language": "语言",
       "language_description": "更改用户界面中使用的语言。"
+    },
+    "Tokens": {
+      "title": "API Tokens",
+      "create": "创建 API Token",
+      "delete": "删除",
+      "no_tokens": "没有 API Token",
+      "no_tokens_description": "您还没有任何 API Token。",
+      "name": "名称",
+      "token": "Token",
+      "actions": "操作",
+      "ModalCreateToken": {
+        "title": "创建 API Token",
+        "name": "名称",
+        "submit": "创建",
+        "cancel": "取消"
+      }
     }
   },
   "WorkspaceSidebar": {
@@ -385,6 +402,14 @@
           "cancel": "取消",
           "submit": "提交"
         }
+      },
+      "API": {
+        "languages": "语言",
+        "tokens": "Tokens",
+        "documents": "文档",
+        "manage_tokens": "管理 Tokens",
+        "data_api": "数据 API",
+        "docs_url": "https://docs.basemulti.com/zh_CN/developer/introduction.html"
       }
     }
   },

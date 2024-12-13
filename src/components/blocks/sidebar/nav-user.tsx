@@ -2,6 +2,7 @@
 
 import {
   BadgeCheck,
+  BookOpenIcon,
   ChevronsUpDown,
   ExternalLinkIcon,
   GithubIcon,
@@ -111,6 +112,15 @@ export function NavUser() {
               <DropdownMenuItem className="gap-2 h-8" onSelect={() => setSettingsOpen(true)}>
                 <BadgeCheck className="h-4 w-4 text-muted-foreground" />
                 {t('account')}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator /><DropdownMenuItem className="gap-2 h-8 justify-between group" onSelect={() => {
+                window.open('https://docs.basemulti.com/');
+              }}>
+                <div className="flex items-center gap-2">
+                  <BookOpenIcon className="h-4 w-4 text-muted-foreground" />
+                  {t('docs')}
+                </div>
+                <ExternalLinkIcon className="hidden group-hover:block h-4 w-4 text-muted-foreground" />
               </DropdownMenuItem>
               <DropdownMenuItem className="gap-2 h-8 justify-between group" onSelect={() => {
                 window.open('https://github.com/basemulti/basemulti');

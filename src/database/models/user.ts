@@ -1,9 +1,10 @@
-import { getRole } from "@/lib/utils";
+import { getRole, nanoid } from "@/lib/utils";
 import { Base, DB } from "..";
 import Collaborator from "./collaborator";
 import Model from "./model";
 import Workspace from "./workspace";
 import { RoleType } from "@/lib/types";
+import { NewAccessToken, PersonalAccessToken, separator } from "@/lib/keeper";
 
 export default class User extends Model {
   table = 'users';
@@ -13,6 +14,8 @@ export default class User extends Model {
   name!: string;
   email!: string;
   password!: string;
+
+  accessToken: PersonalAccessToken | null = null;
 
   relationWorkspaces() {
     return this.belongsToMany(
@@ -233,5 +236,52 @@ export default class User extends Model {
     }
 
     return bases;
+  }
+
+  static async findAuth(token: string) {
+    const accessToken = await PersonalAccessToken.findToken(token);
+
+    if (accessToken) {
+      const user = await User.query().find(accessToken.tokenable_id);
+
+      if (user) {
+        user.withAccessToken(accessToken);
+        return user;
+      }
+    }
+
+    return null;
+  }
+
+  relationTokens() {
+    return this.hasMany(PersonalAccessToken, 'tokenable_id').where('tokenable_type', 'User');
+  }
+
+  tokenCan(ability: string) {
+    return this.accessToken && this.accessToken.can(ability);
+  }
+
+  async createToken(name: string, abilities: string[] = ['*'], expiresAt = null) {
+    const plainTextToken = nanoid(40);
+    
+    const user = this as User;
+    const token = await user.related('tokens').create({
+      name: name,
+      tokenable_type: 'User',
+      token: plainTextToken,
+      abilities: JSON.stringify(abilities),
+    });
+
+    return new NewAccessToken(token, plainTextToken);
+  }
+
+  currentAccessToken() {
+    return this.accessToken;
+  }
+
+  withAccessToken(accessToken: PersonalAccessToken) {
+    this.accessToken = accessToken;
+
+    return this;
   }
 }
