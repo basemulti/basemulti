@@ -6,9 +6,9 @@ import Papa from 'papaparse';
 import { getExportValue } from '@/components/field-types/server';
 import { denies } from '@/lib/utils';
 import { User } from '@/database';
-import { UserVariables } from '../middlewares/authenticate';
 
 const getSchema = cache(SchemaServer.load);
+type UserVariables = { user: User };
 
 const records = new Hono<{ Variables: UserVariables }>();
 

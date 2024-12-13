@@ -1,4 +1,4 @@
-const { Migration, sutando } = require('sutando');
+const { Migration } = require('sutando');
 
 module.exports = class extends Migration {
   /**

@@ -4,7 +4,7 @@ import Collaborator from "./collaborator";
 import Model from "./model";
 import Workspace from "./workspace";
 import { RoleType } from "@/lib/types";
-import { NewAccessToken, PersonalAccessToken, separator } from "@/lib/keeper";
+import { NewAccessToken, PersonalAccessToken } from "@/lib/keeper";
 
 export default class User extends Model {
   table = 'users';

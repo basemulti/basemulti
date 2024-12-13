@@ -45,7 +45,6 @@
     "@tanstack/react-query": "^5.29.0",
     "@tanstack/react-table": "^8.10.7",
     "@tanstack/react-virtual": "^3.10.4",
-    "@uploadthing/react": "^5.7.0",
     "@xyflow/react": "^12.1.1",
     "autoprefixer": "10.4.15",
     "aws-sdk": "^2.1634.0",
