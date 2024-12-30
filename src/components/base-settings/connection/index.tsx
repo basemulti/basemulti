@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { CircleAlertIcon, CircleCheck, Undo2Icon } from "lucide-react";
+import { BookOpenIcon, CircleAlertIcon, CircleCheck, Undo2Icon } from "lucide-react";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
@@ -56,8 +56,6 @@ export default function Index({ workspaceId, baseId, label, connection, provider
   const form = useForm<any>({
     defaultValues: connectionToFormValues({ name: provider, connection })
   });
-
-  console.log('connection', connection, connectionToFormValues({ name: provider, connection }), form.watch())
 
   useEffect(() => {
     const subscription = form.watch((value, { name, type }) => {
@@ -215,8 +213,22 @@ export default function Index({ workspaceId, baseId, label, connection, provider
                   />
                 </div>
               </ScrollArea>
-              <div className="w-80 h-auto border-l border-border p-8 bg-muted/50 text-sm flex flex-col gap-2">
-                <p>{t('prompt')}</p>
+              <div className="w-80 h-auto border-l border-border p-8 bg-muted/50 text-sm flex flex-col gap-3">
+                <div className="text-muted-foreground font-medium">{t('supported_docs')}</div>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-2">
+                    <BookOpenIcon className="size-4" />
+                    <a href="https://docs.basemulti.com/guide/create-base#connecting-to-an-existing-database" className="hover:underline" target="_blank" rel="noopener noreferrer">
+                      {t('create_base')}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <BookOpenIcon className="size-4" />
+                    <a href="https://docs.basemulti.com/guide/datasource-overview.html" className="hover:underline" target="_blank" rel="noopener noreferrer">
+                      {t('data_source')}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

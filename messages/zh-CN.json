@@ -235,7 +235,9 @@
         "update_connection": "更新连接",
         "test_connection": "测试连接",
         "go_back": "返回",
-        "prompt": "您的数据库信息将被安全加密并存储在我们的平台上。我们了解您的数据安全的重要性，并采用最先进的加密技术来保护您的信息。"
+        "supported_docs": "支持文档",
+        "create_base": "创建数据库",
+        "data_source": "数据源"
       },
       "Schema": {
         "only_changes": "只显示变动",
@@ -347,7 +349,8 @@
           "search_type_placeholder": "搜索...",
           "search_type_empty": "没有结果.",
           "save": "保存",
-          "reset": "重置"
+          "reset": "重置",
+          "delete": "删除"
         }
       },
       "Relations": {

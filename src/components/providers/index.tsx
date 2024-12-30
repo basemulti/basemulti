@@ -8,7 +8,6 @@ export const baseProviders: Record<string, ProviderType> = {};
 
 export function registerProvider(provider: ProviderType) {
   const disabled = env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(',').includes(provider.name);
-  console.log(`Registering provider`, env.NEXT_PUBLIC_DISABLE_PROVIDERS?.split(','), provider.name, disabled);
   if (disabled) {
     return;
   }

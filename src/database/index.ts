@@ -125,7 +125,6 @@ export const getManager = (schema: SchemaBuilder) => {
   manager.models = {};
 
   const tables = schema.get().tables as any;
-  const tableNamePrefix = schema.schema.prefix ?? '';
   for (let tableName in tables) {
     const table = tables[tableName];
 
@@ -205,7 +204,7 @@ export const getManager = (schema: SchemaBuilder) => {
     const timestamps = createdAtColumn !== null || updatedAtColumn !== null;
 
     const options: any = {
-      table: `${tableNamePrefix}${tableName}`,
+      table: schema.getTrueTableName(tableName),
       keyType: getKeyType(primaryKeyColumn),
       primaryKey: primaryKeyColumn?.name ?? null,
       incrementing: getIncrementing(primaryKeyColumn),

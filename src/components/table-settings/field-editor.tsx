@@ -8,13 +8,16 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { FieldTypeEditor } from "../field-types";
 import ButtonLoading from "../button-loading";
-import { updateField } from "@/actions/field";
+import { deleteField, updateField } from "@/actions/field";
 import FieldTypeSelector from "./field-type-selector";
 import { useForm, useFormContext, useFormState } from "react-hook-form";
 import { Form, FormField, FormItem } from "../ui/form";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { withDefaultUI } from "@/lib/schema-builder";
+import { TrashIcon } from "lucide-react";
+import { AlertModal } from "../modal/alert-modal";
+import { isSystemField } from "@/lib/utils";
 
 // const UItoSchema = (ui: any) => {
 //   return {
@@ -29,13 +32,19 @@ export default function FieldEditor({
   baseId,
   tableName,
   name,
+  showDeleteButton = true,
+  onInit,
 }: {
   baseId: string;
   tableName: string;
   name: string;
+  showDeleteButton?: boolean;
+  onInit?: () => void;
 }) {
   const [loading, setLoading] = useState<boolean>(false);
   const t = useTranslations('Table.Settings.Fields.Editor');
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { schema, setFieldSchemaBuilber } = useSchemaStore(
     (store) => ({
       schema: store.schema,
@@ -85,6 +94,28 @@ export default function FieldEditor({
     });
   };
 
+  const handleDelete = () => {
+    if (!name) return;
+
+    setDeleting(true);
+    deleteField({
+      baseId,
+      tableName,
+      fieldName: name,
+    }, {
+      originalPath: `/bases/${baseId}/tables/${tableName}/settings/fields`
+    }).then((result) => {
+      if (result?.error) {
+        throw new Error(result.error);
+      }
+      onInit?.();
+    }).catch((error) => toast.error("Uh oh! Something went wrong.", {
+      description: error.message,
+    })).finally(() => {
+      setDeleting(false);
+    });
+  };
+
   return (
     <>
       <Form {...form}>
@@ -97,7 +128,19 @@ export default function FieldEditor({
           name={name}
         />
         <div className="flex items-center justify-between">
-          <div></div>
+          <div className="flex items-center gap-2">
+            {showDeleteButton && <Button
+              className="text-sm h-8 gap-2 px-3"
+              variant={"destructive"}
+              disabled={isSystemField(name)}
+              onClick={() => {
+                setDeleteOpen(true);
+              }}
+            >
+              <TrashIcon className="h-4 w-4" />
+              {t('delete')}
+            </Button>}
+          </div>
           <div className="flex items-center gap-2">
             <Button
               variant={"outline"}
@@ -110,6 +153,12 @@ export default function FieldEditor({
           </div>
         </div>
       </Form>
+      <AlertModal
+        isOpen={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        onConfirm={handleDelete}
+        loading={deleting}
+      />
     </>
   );
 }

@@ -40,7 +40,7 @@ export async function createField({
 
   const manager = getManager(schema);
   const connection = manager.connection();
-  const trueTableName = `${schema.schema.prefix ?? ''}${tableName}`;
+  const trueTableName = schema.getTrueTableName(tableName);
   await connection.schema.table(trueTableName, (table) => {
     onCreateField(value.ui.type, {
       fieldName, table, value
@@ -114,4 +114,49 @@ export async function updateFieldsOrder({
   await schema.sync();
 
   revalidatePath(`/bases/${baseId}/tables/${tableName}/settings/field`);
+}
+
+export async function deleteField({
+  baseId, tableName, fieldName
+}: {
+  baseId: string;
+  tableName: string;
+  fieldName: string;
+}, options?: {
+  originalPath?: string;
+}) {
+  const schema = await getSchema(baseId);
+  if (!schema) {
+    return {
+      error: 'Field not found'
+    }
+  }
+
+  if (denies(schema.getRole(), 'field:delete')) {
+    return {
+      error: 'Field not found'
+    }
+  }
+
+  if (schema.isDefaultProvider()) {
+    if (isSystemField(fieldName)) {
+      return {
+        error: 'Cannot delete system field'
+      }
+    } else {
+      const manager = getManager(schema);
+      const connection = manager.connection();
+      await connection.schema.table(
+        schema.getTrueTableName(tableName),
+        (table) => {
+          table.dropColumn(fieldName);
+        }
+      );
+    }
+  }
+
+  schema.set(`tables.${tableName}.fields.${fieldName}`, undefined);
+  await schema.sync();
+
+  options?.originalPath && revalidatePath(options.originalPath);
 }
