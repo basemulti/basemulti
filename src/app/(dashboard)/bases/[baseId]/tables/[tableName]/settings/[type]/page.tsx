@@ -15,6 +15,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import { Webhook as WebhookModel } from '@/database';
+import { allows } from "@/lib/utils";
 
 const getSchema = cache(SchemaServer.load);
 
@@ -72,7 +73,10 @@ export default async function Page({ params, ...props }: PageProps) {
   const renderType = (type: string) => {
     switch (type) {
       case 'field':
-        return <Field schema={schema.safe()} />;
+        return <Field
+          schema={schema.safe()}
+          showDeleteFieldButton={schema.isDefaultProvider() && allows(schema.getRole(), 'field:delete')}
+        />;
       case 'graph':
         return <Graph schema={schema.safe()} />;
       case 'relation':

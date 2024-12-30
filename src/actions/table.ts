@@ -39,7 +39,7 @@ export async function createTable({
   name = name || nanoid(10);
   const manager = getManager(schema);
   const connection = manager.connection();
-  const tableName = `${schema.schema.prefix ?? ''}${name}`;
+  const tableName = schema.getTrueTableName(name);
   await connection.schema.createTable(tableName, (table) => {
     table.increments('id');
     table.string('name');

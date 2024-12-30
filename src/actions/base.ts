@@ -1,7 +1,7 @@
 'use server';
 
 import { providerSchemaInspector, testProviderConnection } from "@/components/providers/server";
-import { Base, removeManager, User } from "@/database";
+import { Base, getManager, removeManager, User } from "@/database";
 import SchemaBuilder, { SchemaType } from "@/lib/schema-builder";
 import SchemaServer from "@/lib/schema-server";
 import { encrypt, getCurrentUser } from "@/lib/server";
@@ -182,14 +182,22 @@ export async function removeBase({
     return { error: 'id is required' };
   }
 
-  const user = await getCurrentUser() as User;
-  const base = await user?.getBase(id);
+  const schema = await getSchema(id);
 
-  if (!base || denies(base.role, 'base:delete')) {
+  if (!schema || denies(schema.getRole(), 'base:delete')) {
     return { error: 'Base not found' };
   }
+
+  // drop all tables
+  if (schema.isDefaultProvider()) {
+    const tableNames = Object.keys(schema?.getTables() || {});
+    const manager = getManager(schema);
+    await Promise.all(tableNames.map(async (tableName) => {
+      await manager.schema().dropTable(schema.getTrueTableName(tableName));
+    }));
+  }
   
-  await base.delete();
+  await Base.query().where('id', id).delete();
   await removeManager(id);
 }
 

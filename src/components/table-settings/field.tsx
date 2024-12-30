@@ -21,8 +21,9 @@ import FieldCreator from "./field-creator";
 import { useGlobalStore } from "@/store/global";
 import { useTranslations } from "next-intl";
 
-export default function Field({ schema }: {
+export default function Field({ schema, showDeleteFieldButton = true }: {
   schema: any;
+  showDeleteFieldButton?: boolean
 }) {
   const { baseId, tableName: paramTableName }: {
     baseId: string,
@@ -94,6 +95,8 @@ export default function Field({ schema }: {
           baseId={baseId}
           tableName={tableName}
           name={selected}
+          showDeleteButton={showDeleteFieldButton}
+          onInit={handleInitPanel}
         />
       </div>;
     }
@@ -124,6 +127,11 @@ export default function Field({ schema }: {
       fields: fieldsIds,
     });
     setLoading(false);
+  }
+
+  const handleInitPanel = () => {
+    setShowCreateEditor(false);
+    setSelected(null);
   }
 
   const filteredFields = q.length > 0 ? fields.filter(([key, field]: any) => {

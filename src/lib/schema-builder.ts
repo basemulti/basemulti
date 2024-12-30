@@ -273,6 +273,10 @@ export default class SchemaBuilder {
     return this.schema.prefix ?? '';
   }
 
+  getTrueTableName(tableName: string) {
+    return `${this.getPrefix()}${tableName}`;
+  }
+
   getConnection() {
     return this.schema.connection;
   }

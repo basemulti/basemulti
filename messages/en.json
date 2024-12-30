@@ -235,7 +235,9 @@
         "update_connection": "Update Connection",
         "test_connection": "Test Connection",
         "go_back": "Go back",
-        "prompt": "Your database information will be securely encrypted and stored on our platform. We understand the importance of your data security and employ state-of-the-art encryption technologies to protect your information."
+        "supported_docs": "Supported Docs",
+        "create_base": "Create base",
+        "data_source": "Data source"
       },
       "Schema": {
         "only_changes": "Only changes",
@@ -347,7 +349,8 @@
           "search_type_placeholder": "Search...",
           "search_type_empty": "No type found.",
           "save": "Save",
-          "reset": "Reset"
+          "reset": "Reset",
+          "delete": "Delete"
         }
       },
       "Relations": {
