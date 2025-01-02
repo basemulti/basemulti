@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon, PlusIcon, SparklesIcon } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { cn, parseMySqlConnectionString } from "@/lib/utils";
+import { cn, parsePostgresConnectionString } from "@/lib/utils";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useFormContext } from "react-hook-form";
 import {
@@ -60,7 +60,7 @@ export function ConnectionEditor({ title }: ConnectionEditorProps) {
       return;
     }
 
-    const connectionObject = parseMySqlConnectionString(connectionUrl);
+    const connectionObject = parsePostgresConnectionString(connectionUrl);
     if (connectionObject === null) {
       toast.error('Invalid connection string', {
         description: 'Please check your connection string',
