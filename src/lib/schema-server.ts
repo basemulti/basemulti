@@ -119,7 +119,7 @@ export default class SchemaServer extends SchemaBuilder {
 
   withQuery(query: Builder<any>, conditions: any) {
     for (let [method, params] of conditions) {
-      if (['with'].includes(method)) {
+      if (['with', 'select', 'withCount'].includes(method)) {
         query[method](...params);
       } else if (typeof params[0] === 'string') {
         let [column, operator, value] = params;
