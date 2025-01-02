@@ -53,9 +53,9 @@ export function getDefaultUItype(type: string) {
   switch (true) {
     case ['bool', 'boolean'].includes(type):
       return "switch";
-    case (['int', 'decimal'].includes(type) || type?.startsWith('bigint')):
+    case (['int', 'decimal', 'integer'].includes(type) || type?.startsWith('bigint')):
       return "number";
-    case (['datetime', 'timestamp'].includes(type)):
+    case (['datetime', 'timestamp'].includes(type)) || type?.includes('timestamp'):
       return "datetime";
     case (['date'].includes(type)):
       return "date";

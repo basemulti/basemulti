@@ -131,12 +131,12 @@ export function withDefaultUI(field: string, fieldSchema: any) {
         type: "switch",
       });
       break;
-    case ['int', 'decimal'].includes(uiSchema.type) || uiSchema.type?.startsWith('bigint'):
+    case ['int', 'decimal', 'integer'].includes(uiSchema.type) || uiSchema.type?.startsWith('bigint'):
       defaults(uiSchema.ui, {
         type: "number",
       });
       break;
-    case ['datetime', 'timestamp'].includes(uiSchema.type):
+    case ['datetime', 'timestamp'].includes(uiSchema.type) || uiSchema.type?.includes('timestamp'):
       defaults(uiSchema.ui, {
         type: "datetime",
         format: "YYYY-MM-DD HH:mm:ss",
@@ -185,14 +185,14 @@ export function getUISchema(schema: SchemaBuilder, tableName: string, fieldName:
     });
   }
 
-  if (['int', 'decimal'].includes(fieldSchema.type) || fieldSchema.type?.startsWith('bigint')) {
+  if (['int', 'decimal', 'integer'].includes(fieldSchema.type) || fieldSchema.type?.startsWith('bigint')) {
     return defaults(uiSchema, {
       type: "number",
     });
   }
 
 
-  if (['datetime', 'timestamp'].includes(fieldSchema.type)) {
+  if (['datetime', 'timestamp'].includes(fieldSchema.type) || fieldSchema.type?.includes('timestamp')) {
     return defaults(uiSchema, {
       type: "datetime",
       format: "YYYY-MM-DD HH:mm:ss",
