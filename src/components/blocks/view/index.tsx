@@ -59,6 +59,10 @@ async function Grid({ searchParams, schema, tableName, viewId, isSharingPage }: 
       isSharingPage={isSharingPage}
     />;
   } catch (error: any) {
+    const errorMessage = schema.isDefaultProvider() 
+      ? 'An error occurred while fetching data' 
+      : error.message || 'An error occurred while fetching data';
+
     return <GridView
       schema={schema.safe()}
       baseId={schema.schema.id}
@@ -73,7 +77,7 @@ async function Grid({ searchParams, schema, tableName, viewId, isSharingPage }: 
         last_page: 1
       }}
       isSharingPage={isSharingPage}
-      error={error.message}
+      error={errorMessage}
     />;
   }
 }

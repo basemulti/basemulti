@@ -216,7 +216,7 @@ export function FilterOperator({ filters, setFilters, params, index, schema }: {
 
   // 转换保存的值为 Date 对象
   const parseDate = (value: any) => {
-    if (!value) return undefined;
+    if (!value) return new Date;
     
     // 如果是数字（时间戳），需要判断是秒还是毫秒
     if (typeof value === 'number') {
