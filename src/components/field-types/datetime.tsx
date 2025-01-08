@@ -282,8 +282,6 @@ export function FilterOperator({ filters, setFilters, params, index, schema }: {
 }) {
   const [open, setOpen] = useState(false);
 
-  console.log('schema', schema)
-
   // 根据 dateformat 属性决定格式化方式
   const formatDate = (date: Date | null) => {
     if (!date) return null;
@@ -302,7 +300,7 @@ export function FilterOperator({ filters, setFilters, params, index, schema }: {
 
   // 转换保存的值为 Date 对象
   const parseDate = (value: any) => {
-    if (!value) return undefined;
+    if (!value) return new Date;
     
     // 如果是数字（时间戳），需要判断是秒还是毫秒
     if (typeof value === 'number') {
