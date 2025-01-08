@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { CalendarClockIcon, CalendarIcon } from "lucide-react";
 import { FormItem, FormLabel } from "../ui/form";
+import { FilterOperator } from "./datetime";
 
 export const key = 'created-at';
 export const label = 'Created At';
@@ -133,4 +134,8 @@ export function TypeEditor(props: TypeEditorProps) {
       </div>
     </div>
   </>
+}
+
+export {
+  FilterOperator
 }
