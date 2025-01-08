@@ -7,7 +7,7 @@ import { FormItem, FormLabel } from "../ui/form";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { CalendarClockIcon, CalendarIcon } from "lucide-react";
-import { FilterOperator } from "./date";
+import { FilterOperator } from "./datetime";
 
 export const key = 'updated-at';
 export const label = 'Updated At';
