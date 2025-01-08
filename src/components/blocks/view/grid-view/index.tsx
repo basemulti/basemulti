@@ -45,6 +45,7 @@ import useTransitionProgress from "@/hooks/use-transition-progress";
 import CreateRecordButton from "../create-record-button";
 import BulkActions from "../bulk-actions";
 import { useTranslations } from "next-intl";
+import EnhancedError from "@/components/enhanced-error";
 
 interface DataTableProps<TData, TValue> {
   data: {
@@ -65,6 +66,7 @@ interface DataTableProps<TData, TValue> {
   className?: string;
   hideCreateButton?: boolean;
   isSharingPage?: boolean;
+  error?: string;
 }
 
 export function GridView<TData, TValue>({
@@ -78,6 +80,7 @@ export function GridView<TData, TValue>({
   className,
   hideCreateButton = false,
   isSharingPage = false,
+  error,
 }: DataTableProps<TData, TValue>) {
   const schemaBuilder = SchemaBuilder.make(schema);
   const provider = schemaBuilder.getProvider() as string;
@@ -357,7 +360,7 @@ export function GridView<TData, TValue>({
           </Link>)} */}
         </div>
       </div>
-      {rows.length > 80 ? <div className={cn("border-t h-[calc(100vh-200px)]", className)}>
+      {error ? <EnhancedError details={error} /> : rows.length > 80 ? <div className={cn("border-t h-[calc(100vh-200px)]", className)}>
         <TableVirtuoso
           totalCount={rows.length}
           fixedItemHeight={36}

@@ -46,17 +46,36 @@ async function Grid({ searchParams, schema, tableName, viewId, isSharingPage }: 
   if (searchQ && searchField) {
     query.where(searchField, 'like', `%${searchQ}%`);
   }
-  
-  const data = await query.paginate(page, pageLimit);
 
-  return <GridView
-    schema={schema.safe()}
-    baseId={schema.schema.id}
-    tableName={tableName}
-    // dataPromise={data}
-    data={data.toData()}
-    isSharingPage={isSharingPage}
-  />;
+  try {
+    const data = await query.paginate(page, pageLimit);
+
+    return <GridView
+      schema={schema.safe()}
+      baseId={schema.schema.id}
+      tableName={tableName}
+      // dataPromise={data}
+      data={data.toData()}
+      isSharingPage={isSharingPage}
+    />;
+  } catch (error: any) {
+    return <GridView
+      schema={schema.safe()}
+      baseId={schema.schema.id}
+      tableName={tableName}
+      // dataPromise={data}
+      data={{
+        current_page: 1,
+        data: [],
+        per_page: 15,
+        total: 0,
+        count: 0,
+        last_page: 1
+      }}
+      isSharingPage={isSharingPage}
+      error={error.message}
+    />;
+  }
 }
 
 export default async function View(props: {

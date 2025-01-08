@@ -17,6 +17,7 @@ export default function FilterOperator(props: {
 
   return <FieldFilterOperator 
     type={selectedColumn?.ui?.type} 
+    schema={selectedColumn}
     {...props} 
   />
 }

@@ -1,0 +1,19 @@
+/* Hide native calendar picker icon */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-outer-spin-button,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="datetime-local"],
+input[type="date"] {
+  position: relative;
+  -moz-appearance: textfield;
+}
