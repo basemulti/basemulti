@@ -49,7 +49,7 @@ export function Editor({ name, schema, disabled }: any) {
           {schema?.label}
         </FormLabel>
         <DateTimePicker
-          date={field.value instanceof Date ? field.value : dayjs(field.value).toDate()}
+          date={field.value ? (field.value instanceof Date ? field.value : dayjs(field.value).toDate()) : undefined}
           onSelect={(date) => {
             if (date) {
               field.onChange(date);
