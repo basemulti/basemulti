@@ -24,8 +24,9 @@ import Link from "next/link"
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
-export function WorkspaceSidebar({ workspaces, ...props }: React.ComponentProps<typeof Sidebar> & {
+export function WorkspaceSidebar({ workspaces, showAdminButton = false, ...props }: React.ComponentProps<typeof Sidebar> & {
   workspaces: any;
+  showAdminButton?: boolean;
 }) {
   const t = useTranslations('WorkspaceSidebar');
   const pathname = usePathname();
@@ -53,6 +54,14 @@ export function WorkspaceSidebar({ workspaces, ...props }: React.ComponentProps<
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              {showAdminButton && <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={pathname === '/admin'}>
+                  <Link href="/admin">
+                    <HomeIcon className="size-4" />
+                    <span>{'管理后台'}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

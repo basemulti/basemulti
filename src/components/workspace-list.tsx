@@ -18,7 +18,13 @@ import WorkspaceCard from "./workspace-card";
 import { useWorkspacesStore } from "@/store/workspace";
 import { useTranslations } from "next-intl";
 
-export default function WorkspaceList({ workspaces }: { workspaces: any }) {
+export default function WorkspaceList({
+  workspaces,
+  allowCreateWorkspace
+}: {
+  workspaces: any;
+  allowCreateWorkspace: boolean;
+}) {
   const {
     orderBy,
     viewFor,
@@ -73,7 +79,7 @@ export default function WorkspaceList({ workspaces }: { workspaces: any }) {
             {t(viewFor === 'base' ? 'Tabs.base' : 'Tabs.workspace')}
           </Button>
         </div>
-        <CreateWorkspace />
+        {allowCreateWorkspace && <CreateWorkspace />}
       </div>
     </div>
     <div className="overflow-y-scroll px-10 py-4 bg-muted/50 flex-1">

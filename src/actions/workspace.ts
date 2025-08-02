@@ -1,11 +1,17 @@
 'use server';
 
 import { Base, type User, Workspace } from "@/database";
-import { getCurrentUser } from "@/lib/server";
+import { getCurrentUser, getSettings } from "@/lib/server";
 import { denies } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 export async function createWorkspace({ label }: { label: string; }) {
+  const settings = await getSettings();
+
+  if (!settings.allow_create_workspace) {
+    return { error: "You cannot create a workspace" };
+  }
+
   const user = await getCurrentUser();
 
   if (!label) {

@@ -179,6 +179,31 @@
     "duplicate": "Duplicate",
     "delete": "Delete"
   },
+  "AdminSidebar": {
+    "console": "Console",
+    "workspaces": "Workspaces",
+    "users": "Users",
+    "settings": "Settings",
+    "back": "Back to workspace"
+  },
+  "Admin": {
+    "Users": {
+      "search_placeholder": "Search...",
+      "name": "Name",
+      "email": "Email",
+      "created_at": "Created at",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "Workspaces": {
+      "search_placeholder": "Search...",
+      "label": "Workspace Label",
+      "bases_count": "Base Count",
+      "collaborators_count": "Collaborators Count",
+      "created_at": "Created At",
+      "actions": "Actions"
+    }
+  },
   "BaseSidebar": {
     "platform": "Platform",
     "tables": "Tables",

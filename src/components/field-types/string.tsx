@@ -10,6 +10,8 @@ import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "@
 import set from "lodash/set";
 import { useFormContext } from "react-hook-form";
 import { FieldIcon } from ".";
+import isPlainObject from "lodash/isPlainObject";
+import isString from "lodash/isString";
 
 export const key = 'string';
 export const label = 'Single Line Text';
@@ -21,8 +23,20 @@ export function Icon({ className }: {
 }
 
 export function Value({ value, schema }: any) {
+  let renderValue;
+
+  if (value === null || value === undefined) {
+    renderValue = '';
+  } else if (isString(value)) {
+    renderValue = value;
+  } else if (isPlainObject(value)) {
+    renderValue = JSON.stringify(value);
+  } else {
+    renderValue = String(value);
+  }
+
   return <div className="flex">
-    <span className="max-w-[30rem] break-all">{value}</span>
+    <span className="max-w-[30rem] break-all">{renderValue}</span>
   </div>;
 }
 
@@ -32,26 +46,29 @@ export function Editor({ name, schema, disabled }: any) {
   return <FormField
     control={control}
     name={name}
-    render={({ field }) => (
-      <FormItem className="space-y-0 flex flex-row w-full">
-        <FormLabel className="w-1/5 gap-2 flex flex-row items-center">
-          <FieldIcon type={key} />
-          {schema?.label}
-        </FormLabel>
-        <div className="w-3/5">
-          <FormControl>
-            <Input
-              className="disabled:opacity-80"
-              disabled={disabled || schema.ui.disabled}
-              placeholder={schema?.label}
-              {...field}
-              value={field.value || ''}
-            />
-          </FormControl>
-          <FormMessage className="mt-1" />
-        </div>
-      </FormItem>
-    )}
+    render={({ field }) => {
+      const renderValue = isString(field.value) ? field.value : isPlainObject(field.value) ? JSON.stringify(field.value) : String(field.value);
+      return (
+        <FormItem className="space-y-0 flex flex-row w-full">
+          <FormLabel className="w-1/5 gap-2 flex flex-row items-center">
+            <FieldIcon type={key} />
+            {schema?.label}
+          </FormLabel>
+          <div className="w-3/5">
+            <FormControl>
+              <Input
+                className="disabled:opacity-80"
+                disabled={disabled || schema.ui.disabled}
+                placeholder={schema?.label}
+                {...field}
+                value={renderValue}
+              />
+            </FormControl>
+            <FormMessage className="mt-1" />
+          </div>
+        </FormItem>
+      );
+    }}
   />
 }
 

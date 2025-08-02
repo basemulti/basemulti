@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import { cache } from 'react';
 import { appString } from './utils';
 import { env } from './env';
+import Setting from '@/database/models/setting';
 
 const key = crypto.createHash('sha256').update(env.BASEMULTI_KEY as string).digest();
 
@@ -50,14 +51,30 @@ export const ProviderMap = {
   sqlite: 'sqlite3',
 };
 
-export async function databaseInspector(provider: string, connection: any) {
+export async function databaseInspector(provider: string, connection: any, insprectorProvider?: any) {
   const manager = new sutando();
   manager.addConnection(connection);
   const inspector = schemaInspector(
     manager.connection(),
-    provider
+    insprectorProvider || provider
   );
-  const columns = await inspector.columnInfo();
+
+  const tables = await inspector.tables();
+
+  if (provider === 'd1') {
+    const index = tables.indexOf('_cf_KV');
+
+    if (index !== -1) {
+      tables.splice(index, 1);
+    }
+  }
+
+  const columnsPerTable = await Promise.all(
+    tables.map(async (table: string) => await inspector.columnInfo(table))
+  );
+  const columns = columnsPerTable.flat();
+
+  // const columns = await inspector.columnInfo();
   const tableSchema: any = {};
 
   for (const column of columns) {
@@ -78,12 +95,16 @@ export async function databaseInspector(provider: string, connection: any) {
     if (column.data_type === 'enum') {
       tableSchema[column.table].fields[column.name].ui = {
         type: 'select',
-        enum: column?.enum_values?.map((v) => ({ label: v, value: v })),
+        enum: column?.enum_values?.map((v: string) => ({ label: v, value: v })),
       };
     }
   }
 
-  const keys = await inspector.foreignKeys();
+  const foreignKeysPerTable = await Promise.all(
+    tables.map(async (table: string) => await inspector.foreignKeys(table))
+  );
+  const keys = foreignKeysPerTable.flat();
+  // const keys = await inspector.foreignKeys();
   for (const key of keys) {
     if (!tableSchema[key.table] || !tableSchema[key.foreign_key_table]) {
       continue;
@@ -162,3 +183,12 @@ export const getUserWorkspace = cache(async (user: User | null, id: string) => {
 export const getShare = cache(async (id: string) => {
   return await Share.query().find(id);
 });
+
+export const isAdmin = async () => {
+  const user = await getCurrentUser();
+  return user?.email === env.ADMIN_EMAIL;
+}
+
+export const getSettings = cache(async () => {
+  return await Setting.query().firstOrFail();
+})

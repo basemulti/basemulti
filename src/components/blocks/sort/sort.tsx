@@ -28,6 +28,7 @@ export default function Sort({ baseId, tableName, view, schemaBuilder, table, de
   const [sorts, setSorts] = useState<SortsType>(defaultSorts);
   const [loading, setLoading] = useState(false);
   const t = useTranslations('ViewBar.Sort');
+  const defaultField = table.getAllColumns().find((column) => column.getCanHide())?.id as string;
 
   useEffect(() => {
     setSorts(defaultSorts);
@@ -36,7 +37,7 @@ export default function Sort({ baseId, tableName, view, schemaBuilder, table, de
   const handleAddSort = () => {
     setSorts([
       ...sorts,
-      ['orderBy', ['id', 'asc']]
+      ['orderBy', [defaultField, 'asc']]
     ]);
   }
 

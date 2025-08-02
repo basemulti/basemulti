@@ -4,12 +4,18 @@ import { User, Workspace } from "@/database";
 import * as bcrypt from "bcrypt-ts";
 import { getCurrentUser, getSession } from "@/lib/server";
 import { redirect } from "next/navigation";
+import { getSettings } from "@/lib/server";
 
 export async function signUp(email: string, password: string) {
+  const settings = await getSettings();
+  if (!settings.allow_registration) {
+    return { error: "You cannot register" };
+  }
+
   if (!email || !password) {
     return { error: "Email and password are required." };
   }
-  
+
   if (email && (
     (await User.query().where('email', email).count()) > 0
   )) {

@@ -21,16 +21,12 @@ export default function Cell({
   isSharingPage?: boolean;
 }) {
   if (cell.column.id === selectId) {
-    return <FieldValue
-      type={'string'}
-      value={flexRender(
+    return <div className="flex">
+      <span className="max-w-[30rem] break-all">{flexRender(
         cell.column.columnDef.cell,
         cell.getContext(),
-      )}
-      schema={ui}
-      row={cell.row.original}
-      isSharingPage={isSharingPage}
-    />;
+      )}</span>
+    </div>;
   }
 
   // if (provider === 'default') {

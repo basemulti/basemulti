@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import files from './routes/files';
 import records from './routes/records';
+import settings from './routes/settings';
 
 export const app = new Hono()
   .basePath('/api')
@@ -10,4 +11,5 @@ export const app = new Hono()
     })
   })
   .route('/files', files)
-  .route('/', records);
+  .route('/', records)
+  .route('/settings', settings);
