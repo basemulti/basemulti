@@ -1,6 +1,7 @@
 import * as MysqlProvider from './mysql/server';
 import * as PostgresProvider from './postgres/server';
 import * as SqliteProvider from './sqlite/server';
+import * as D1Provider from './d1/server';
 
 export const baseProviderActions: Record<string, ProviderActionType> = {};
 
@@ -35,3 +36,4 @@ export function providerConfig({ provider, connection }: { provider: string, con
 registerBaseProviderActions(MysqlProvider);
 registerBaseProviderActions(PostgresProvider);
 registerBaseProviderActions(SqliteProvider);
+registerBaseProviderActions(D1Provider);
