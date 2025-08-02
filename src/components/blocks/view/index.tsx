@@ -2,7 +2,8 @@
 
 import SchemaServer from "@/lib/schema-server";
 import EnhancedError from "@/components/enhanced-error";
-import { GridView } from "@/components/blocks/view/grid-view";
+// import { GridViewV2 as GridView } from "@/components/blocks/view/grid-view-v2";
+import {GridView } from "@/components/blocks/view/grid-view";
 import ModalDetail from "@/components/details/modal-detail";
 
 async function Grid({ searchParams, schema, tableName, viewId, isSharingPage }: {

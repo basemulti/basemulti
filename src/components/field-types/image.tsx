@@ -38,9 +38,16 @@ export function Value({ value, schema }: any) {
   const srcs: string[] = [];
 
   if (isMultiple) {
-    srcs.push(schemaUrl ? value.split(',').map((src: string) => schemaUrl.replace('{value}', src)) : value.split(','));
+    const images = value.split(',');
+    srcs.push(schemaUrl
+      ? images.map((src: string) => src.startsWith('http') ? src : schemaUrl.replace('{value}', src))
+      : images
+    );
   } else {
-    srcs.push(schemaUrl ? schemaUrl.replace('{value}', value) : String(value));
+    srcs.push(schemaUrl
+      ? (value.startsWith('http') ? value : schemaUrl.replace('{value}', value))
+      : String(value)
+    );
   }
 
   return <>
@@ -70,9 +77,10 @@ const UploadButtonBase = forwardRef<HTMLDivElement>(
     useItemFinalizeListener((item, options: any) => {
       if (item.state === 'finished') {
         setUploading(false);
+        console.log(item, options);
         options?.params?.onFinished && options?.params?.onFinished({
           file: item.file,
-          filename: options?.metadata?.filename
+          filename: item.uploadResponse?.data?.name
         });
       }
 
@@ -206,6 +214,7 @@ export function Editor({ name, control, schema }: any) {
       }
 
       const imageUrl = (value: string) => {
+        if (value.startsWith('http')) return value;
         return url ? url.replace('{value}', value) : value;
       }
 

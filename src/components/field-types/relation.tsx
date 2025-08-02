@@ -3,7 +3,7 @@ import { FormControl, FormField, FormLabel, FormMessage, FormItem } from "../ui/
 import 'react-markdown-editor-lite/lib/index.css';
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from "../ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -36,7 +36,16 @@ export function Icon({ className }: {
 export function Value({ value, schema, row, baseId, tableName, isSharingPage }: any) {
   const { open } = useGlobalStore((store) => ({
     open: store.openDetailModal
-  }))
+  }));
+  const schemaFull = useSchemaStore(store => store.schema);
+
+  const recordKey = useMemo(() => {
+    if (schema.relation === undefined) {
+      return;
+    }
+
+    return schema?.relation?.owner_key || schemaFull?.getPrimaryKey(schema?.relation?.table);
+  }, [schema, schemaFull]);
 
   if (schema.relation === undefined) {
     return value;
@@ -57,7 +66,7 @@ export function Value({ value, schema, row, baseId, tableName, isSharingPage }: 
         open({
           baseId: baseId,
           tableName: schema?.relation?.table,
-          recordId: row?.[schema.name]?.[schema.primary_key || 'id']
+          recordId: row?.[schema.name]?.[recordKey]
         });
       }}>
         {row?.[schema.name]?.[schema.label_field || 'id']}

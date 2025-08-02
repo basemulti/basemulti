@@ -15,4 +15,5 @@ export const env = {
   AWS_BUCKET: process.env.AWS_BUCKET,
   AWS_BUCKET_URL: process.env.AWS_BUCKET_URL,
   AWS_DIRECTORY: process.env.AWS_DIRECTORY,
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL,
 };

@@ -42,3 +42,6 @@ next-env.d.ts
 # storage
 /public/storage/*
 !/public/storage/.gitkeep
+
+# electron
+/dist

@@ -179,6 +179,31 @@
     "duplicate": "复制",
     "delete": "删除"
   },
+  "AdminSidebar": {
+    "console": "控制台",
+    "workspaces": "工作区",
+    "users": "用户",
+    "settings": "设置",
+    "back": "返回工作区"
+  },
+  "Admin": {
+    "Users": {
+      "search_placeholder": "搜索用户...",
+      "name": "名称",
+      "email": "邮箱",
+      "created_at": "创建于",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "Workspaces": {
+      "search_placeholder": "搜索工作区...",
+      "label": "工作区名称",
+      "bases_count": "数据库数量",
+      "collaborators_count": "协作者数量",
+      "created_at": "创建于",
+      "actions": "操作"
+    }
+  },
   "BaseSidebar": {
     "platform": "平台",
     "tables": "表格",

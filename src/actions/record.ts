@@ -65,7 +65,7 @@ export async function editRecord({
     data.updated_by = user.id;
   }
 
-  const record = await schema.query(tableName).where('id', id).first();
+  const record = await schema.query(tableName).find(id);
   if (!record) {
     return {
       error: `Record "${id}" not found`

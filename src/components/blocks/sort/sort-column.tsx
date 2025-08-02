@@ -27,7 +27,7 @@ export default function SortColumn({ params, index, table, sorts, setSorts }: {
     <PopoverTrigger asChild>
       <Button variant={'outline'} className="w-[150px] text-sm h-8 rounded-r-none bg-white">
         <div className="flex flex-1 items-center truncate">
-          {selectedColumn?.label ?? params[0]}
+          {selectedColumn?.title ?? params[0]}
         </div>
         <ChevronsUpDownIcon className="size-3 opacity-50" />
       </Button>

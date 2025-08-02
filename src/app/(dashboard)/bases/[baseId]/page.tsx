@@ -36,7 +36,9 @@ export default async function page({ params, searchParams }: PageProps) {
         </Bar>
         <div className="size-full flex flex-col items-center justify-center gap-4">
           {/* <div className="rounded-md shadow p-6 border border-border"> */}
-            <SquareLibraryIcon strokeWidth={'0.75px'} className="size-20" />
+            <div className="bg-muted rounded-md p-2">
+              <SquareLibraryIcon className="size-8 text-muted-foreground" />
+            </div>
             <div className="text-sm mb-10">{t('prompt')}</div>
           {/* </div> */}
         </div>

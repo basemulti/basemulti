@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRigh
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-export default function Pagination({ page, onPageChange, total, limit, onLimitChange, pageSizeOptions, lastPage, currentPage }: {
+export default function Pagination({ page, onPageChange, total, limit, onLimitChange, pageSizeOptions, lastPage, currentPage, className }: {
   page: number;
   onPageChange: (page: number) => void;
   total: number;
@@ -15,6 +15,7 @@ export default function Pagination({ page, onPageChange, total, limit, onLimitCh
   pageSizeOptions: string[] | number[];
   lastPage: number;
   currentPage: number;
+  className?: string;
 }) {
   const [pageInput, setPageInput] = useState(page);
   const t = useTranslations('Pagination');
@@ -23,7 +24,7 @@ export default function Pagination({ page, onPageChange, total, limit, onLimitCh
     setPageInput(page);
   }, [page]);
 
-  return <div>
+  return <div className={className}>
     <div className="bg-background border-t border-border flex flex-col gap-2 sm:flex-row items-center justify-end space-x-2 h-[50px] px-4">
       <div className="flex items-center justify-between w-full">
         <div className="flex-1 text-sm text-muted-foreground">

@@ -3,7 +3,7 @@
 import { User } from "@/database";
 import { cache } from "react";
 import WorkspaceList from "@/components/workspace-list";
-import { getCurrentUser } from "@/lib/server";
+import { getCurrentUser, getSettings } from "@/lib/server";
 import GlobalInitializer from "@/components/global-initalizer";
 
 type PageProps = {
@@ -20,6 +20,7 @@ export default async function Page({ params, searchParams }: PageProps) {
   const user = await getCurrentUser();
   const wspaces = await getWorkspaces(user as User);
   const workspaces = wspaces.toData();
+  const settings = await getSettings();
 
   return (
     <>
@@ -35,7 +36,10 @@ export default async function Page({ params, searchParams }: PageProps) {
               </div>
             </div>
           </div>
-          <WorkspaceList workspaces={workspaces} />
+          <WorkspaceList
+            workspaces={workspaces}
+            allowCreateWorkspace={settings.allow_create_workspace}
+          />
         </div>
       </GlobalInitializer>
     </>
