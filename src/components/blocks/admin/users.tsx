@@ -86,7 +86,7 @@ export default function Users({
             <Table className="w-full">
               <TableBody>
                 {data?.data?.map((item: any) => {
-                  return <TableRow className="hover:bg-background">
+                  return <TableRow key={item.id} className="hover:bg-background">
                   <TableCell className="font-medium w-7/12 overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px] truncate">
                     <div className="flex items-center gap-2">
                       <Avatar className="w-8 h-8 rounded-lg">
