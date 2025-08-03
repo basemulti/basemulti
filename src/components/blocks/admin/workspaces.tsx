@@ -85,7 +85,7 @@ export default function Workspaces({
             <Table className="w-full">
               <TableBody>
                 {data?.data?.map((item: any) => {
-                  return <TableRow className="hover:bg-background">
+                  return <TableRow key={item.id} className="hover:bg-background">
                   <TableCell className="font-medium w-5/12 overflow-hidden text-ellipsis whitespace-nowrap max-w-[100px] truncate">
                     <div className="flex flex-col gap-0.5">
                       {item.label}
