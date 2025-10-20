@@ -2,6 +2,7 @@ import Model from "./model";
 import { v4 as uuid } from 'uuid';
 
 export default class Setting extends Model {
+  table = "settings";
   timestamps = false;
 
   casts = {
