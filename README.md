@@ -1,3 +1,11 @@
+<div align="center">
+  <a href="https://basevolt.app">
+    <img src="/logo.svg" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3>Basevolt</h3>
+</div>
+
 # ⚠️ Project Transition Notice: Basemulti is now Basevolt
 
 **Notice:** This open-source repository (Basemulti) has been officially retired and replaced by **Basevolt** — a professional, local-first database management client and admin panel builder.
